@@ -1,12 +1,17 @@
 .side-bar {
   align-items: center;
+  background-color: white;
   border: 1px solid #DFDFDF;
   border-radius: 0px 0px 50px 0px;
   display: flex;
   flex-wrap: wrap;
   height: 100vh;
   justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
   width: 5vw;
+  z-index: 1000;
 
   .icons {
     display: flex;

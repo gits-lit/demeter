@@ -11,19 +11,19 @@ const SideBar = () => {
   return (
     <nav className="side-bar">
       <Link className="logo" to="/">
-        <img src={logo} />
+        <img src={logo} alt="logo icon"/>
       </Link>
       <div className="icons">
         <div className="icon">
-          <img src={map} />
+          <img src={map} alt="map icon"/>
           <p>Map</p>
         </div>
         <div className="icon">
-          <img src={saved} />
+          <img src={saved} alt="saved icon"/>
           <p>Saved</p>
         </div>
         <div className="icon">
-          <img src={statistics} />
+          <img src={statistics} alt="statistics icon"/>
           <p>Statistics</p>
         </div>
       </div>
