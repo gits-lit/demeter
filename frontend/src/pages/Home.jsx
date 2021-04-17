@@ -4,6 +4,8 @@ import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
 import Map from 'components/Map';
 
+import Timeline from 'components/Timeline';
+
 const HomePage = () => {
   const [sideBarPage, setSideBarPage] = useState('map');
 
@@ -12,6 +14,7 @@ const HomePage = () => {
       <NavBar />
       <SideBar setSideBarPage={setSideBarPage}/>
       <Map sideBarPage={sideBarPage}/>
+      <Timeline />
     </div>
   )
 }

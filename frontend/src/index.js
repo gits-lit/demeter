@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import './index.scss';
+import './style.scss';
 import Home from 'pages/Home';
 import Landing from 'pages/Landing';
 
