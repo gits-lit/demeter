@@ -20,7 +20,8 @@
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "express-validator": "^6.10.0"
+    "express-validator": "^6.10.0",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.1",
