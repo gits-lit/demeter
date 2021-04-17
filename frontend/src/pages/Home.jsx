@@ -5,6 +5,7 @@ import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
 
 import CurrentlySelected from 'components/CurrentlySelected';
+import Seasons from 'components/Seasons';
 import Timeline from 'components/Timeline';
 
 const HomePage = () => {
@@ -17,6 +18,7 @@ const HomePage = () => {
       <Map sideBarPage={sideBarPage}/>
       <Timeline />
       <CurrentlySelected />
+      <Seasons />
     </div>
   )
 }
