@@ -15,13 +15,13 @@ import { getWeatherHistory } from './ambee/weatherHistory';
 import { getWeatherLatest } from './ambee/weatherLatest';
 import { getPollenLatest } from './ambee/pollenLatest';
 import { USE_API } from 'src/configuration';
-import exampleResponse from '../data/exampleResponse.json'
+import exampleResponse from '../data/perfectResponse.json';
 
 const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
     if (!USE_API) {
-        return res.json(exampleResponse)
+        return res.json(exampleResponse);
     }
 
     await check('lat')
@@ -39,6 +39,61 @@ router.get('/', async (req: Request, res: Response) => {
         .optional({ checkFalsy: true })
         .run(req);
 
+    const endpoints = [
+        {
+            name: 'airQuality',
+            api: getAirQuality,
+        },
+        {
+            name: 'airQualityHistory',
+            api: getAirQualityHistory,
+        },
+        {
+            name: 'fireLatest',
+            api: getFireLatest,
+        },
+        {
+            name: 'pollenForecast',
+            api: getPollenForecast,
+        },
+        {
+            name: 'pollenHistory',
+            api: getPollenHistory,
+        },
+        {
+            name: 'soilLatest',
+            api: getSoilLatest,
+        },
+        {
+            name: 'soilHistory',
+            api: getSoilHistory,
+        },
+        {
+            name: 'waterVaporHistory',
+            api: getWaterVaporHistory,
+        },
+        {
+            name: 'waterVaporLatest',
+            api: getWaterVaporLatest,
+        },
+        {
+            name: 'weatherForecast',
+            api: getWeatherForecast,
+        },
+        {
+            name: 'weatherHistory',
+            api: getWeatherHistory,
+        },
+        {
+            name: 'weatherLatest',
+            api: getWeatherLatest,
+        },
+        {
+            name: 'pollenLatest',
+            api: getPollenLatest,
+        },
+    ];
+
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -48,7 +103,6 @@ router.get('/', async (req: Request, res: Response) => {
             parametersSent: req.body,
         });
     } else {
-        // TODO: validate if we're doing timeline mode or not
         const { lat, lng }: { lat: number; lng: number } = req.body;
         let from: string, to: string;
         const usingTimes = !!req.body.from && !!req.body.to;
@@ -56,44 +110,28 @@ router.get('/', async (req: Request, res: Response) => {
             from = ambeeDateParse(from);
             to = ambeeDateParse(to);
         }
-        let timeData: any = {};
 
-        const airQuality = await getAirQuality(lat, lng);
-        const fireLatest = await getFireLatest(lat, lng);
-        const pollenForecast = await getPollenForecast(lat, lng);
-        const soilLatest = await getSoilLatest(lat, lng);
-        const waterVaporLatest = await getWaterVaporLatest(lat, lng);
-        const weatherForecast = await getWeatherForecast(lat, lng);
-        const weatherLatest = await getWeatherLatest(lat, lng);
-        const pollenLatest = await getPollenLatest(lat, lng);
+        let data: any = {};
 
-        if (usingTimes) {
-            const airQualityHistory = await getAirQualityHistory(lat, lng, from, to);
-            const pollenHistory = await getPollenHistory(lat, lng, from, to);
-            const waterVaporHistory = await getWaterVaporHistory(lat, lng, from, to);
-            const soilHistory = await getSoilHistory(lat, lng, from, to);
-            const weatherHistory = await getWeatherHistory(lat, lng, from, to);
-            timeData = { airQualityHistory, pollenHistory, waterVaporHistory, soilHistory, weatherHistory };
+        for (const endpoint of endpoints) {
+            if (req.body[endpoint.name] == 'API') {
+                console.log(`requesting ${endpoint.name} using the api`)
+                const result = await endpoint.api(lat, lng, from, to)
+                const success = !result.error
+                if (success) {
+                    data[endpoint.name] = result;
+                    continue;
+                } else {
+                    console.log(`request for ${endpoint.name} failed — using cache`)
+                }       
+            }
+            console.log(`using cached data from ${endpoint.name}`)
+            data[endpoint.name] = (exampleResponse.insights as any)[endpoint.name]
         }
-
         return res.json({
             lat,
             lng,
-            insights: {
-                current: {
-                    airQuality,
-                    fireLatest,
-                    pollenForecast,
-                    soilLatest,
-                    waterVaporLatest,
-                    weatherForecast,
-                    weatherLatest,
-                    pollenLatest,
-                },
-                time: {
-                    ...timeData,
-                },
-            },
+            insights: data
         });
     }
 });
