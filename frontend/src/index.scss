@@ -1,6 +1,9 @@
 body {
   font-family: Poppins, sans-serif;
+  height: 100vh;
   margin: 0;
+  overflow: hidden;
+  width: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
