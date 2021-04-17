@@ -1,0 +1,43 @@
+.side-bar {
+  align-items: center;
+  border: 1px solid #DFDFDF;
+  border-radius: 0px 0px 50px 0px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  justify-content: center;
+  width: 5vw;
+
+  .icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+
+    .icon {
+      cursor: pointer;
+      text-align: center;
+      transition: 0.15s;
+      width: 100%;
+
+      img {
+        width: 60%;
+      }
+
+      p {
+        font-weight: 500;
+        font-size: 12px;
+        margin-top: 0;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .logo {
+    position: absolute;
+    top: 15px;
+  }
+}
