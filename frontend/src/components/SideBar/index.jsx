@@ -7,24 +7,24 @@ import map from 'assets/map.svg';
 import saved from 'assets/saved.svg';
 import statistics from 'assets/statistics.svg';
 
-const SideBar = () => {
+const SideBar = (props) => {
   return (
     <nav className="side-bar">
       <Link className="logo" to="/">
         <img src={logo} alt="logo icon"/>
       </Link>
       <div className="icons">
-        <div className="icon">
+        <div className="icon" onClick={() => {props.setSideBarPage('map')}}>
           <img src={map} alt="map icon"/>
           <p>Map</p>
         </div>
-        <div className="icon">
+        <div className="icon" onClick={() => {props.setSideBarPage('create')}}>
           <img src={saved} alt="saved icon"/>
-          <p>Saved</p>
+          <p>Create</p>
         </div>
-        <div className="icon">
+        <div className="icon" onClick={() => {props.setSideBarPage('statistics')}}>
           <img src={statistics} alt="statistics icon"/>
-          <p>Statistics</p>
+          <p>Harvest Statistics</p>
         </div>
       </div>
     </nav>
