@@ -13,12 +13,13 @@ const Map = ReactMapboxGl({
 });
 
 const MapComponent = (props) => {
-  const height = props.create ? '30vh' : '95vh';
-  const bottom = props.create ? '51.5vh' : '0vh';
-  const bottomtwo = props.create ? '-39.5vh' : '0vh';
-  const radius = props.create ? '5px' : '0';
-  const right = props.create ? '2vw' : '0';
-  const width = props.create ? '63vw' : '100vw';
+  console.log(props.sideBarPage);
+  const height = (props.sideBarPage !== 'map') ? '70vh' : '95vh';
+  const bottom = (props.sideBarPage !== 'map') ? '11vh' : '0vh';
+  const bottomtwo = (props.sideBarPage !== 'map') ? '0vh' : '0vh';
+  const radius = (props.sideBarPage !== 'map') ? '6px' : '0';
+  const left = (props.sideBarPage !== 'map') ? '6vw' : '5vw';
+  const width = (props.sideBarPage !== 'map') ? '45vw' : '100vw';
 
   const onMapLoad = (map) => {
     window.map = map;
@@ -31,7 +32,7 @@ const MapComponent = (props) => {
   return (
     <div style={{
       position: 'absolute',
-      right: right,
+      left: left,
       height: height,
       transition: '1s',
       overflow: 'hidden',
