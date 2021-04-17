@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { matchedData, validationResult, check } from 'express-validator';
 import { ambeeDateParse } from 'src/utils/parseDate';
-import { handleError } from 'src/utils/handleError';
 import { getAirQuality } from './ambee/airQuality';
 import { getAirQualityHistory } from './ambee/airQualityHistory';
 import { getFireLatest } from './ambee/fireLatest';
@@ -9,14 +8,22 @@ import { getPollenForecast } from './ambee/pollenForecast';
 import { getPollenHistory } from './ambee/pollenHistory';
 import { getSoilLatest } from './ambee/soilLatest';
 import { getSoilHistory } from './ambee/soilHistory';
+import { getWaterVaporHistory } from './ambee/waterVaporHistory';
+import { getWaterVaporLatest } from './ambee/waterVaporLatest';
 import { getWeatherForecast } from './ambee/weatherForecast';
 import { getWeatherHistory } from './ambee/weatherHistory';
 import { getWeatherLatest } from './ambee/weatherLatest';
 import { getPollenLatest } from './ambee/pollenLatest';
+import { USE_API } from 'src/configuration';
+import exampleResponse from '../data/exampleResponse.json'
 
 const router = Router();
 
 router.get('/', async (req: Request, res: Response) => {
+    if (!USE_API) {
+        return res.json(exampleResponse)
+    }
+
     await check('lat')
         .isFloat({ min: -90, max: 90 })
         .run(req);
@@ -49,34 +56,43 @@ router.get('/', async (req: Request, res: Response) => {
             from = ambeeDateParse(from);
             to = ambeeDateParse(to);
         }
+        let timeData: any = {};
 
         const airQuality = await getAirQuality(lat, lng);
-        const airQualityHistory = await getAirQualityHistory(lat, lng, from, to);
         const fireLatest = await getFireLatest(lat, lng);
         const pollenForecast = await getPollenForecast(lat, lng);
-        const pollenHistory = await getPollenHistory(lat, lng, from, to);
         const soilLatest = await getSoilLatest(lat, lng);
-        const soilHistory = await getSoilHistory(lat, lng, from, to);
+        const waterVaporLatest = await getWaterVaporLatest(lat, lng);
         const weatherForecast = await getWeatherForecast(lat, lng);
-        const weatherHistory = await getWeatherHistory(lat, lng, from, to);
         const weatherLatest = await getWeatherLatest(lat, lng);
         const pollenLatest = await getPollenLatest(lat, lng);
+
+        if (usingTimes) {
+            const airQualityHistory = await getAirQualityHistory(lat, lng, from, to);
+            const pollenHistory = await getPollenHistory(lat, lng, from, to);
+            const waterVaporHistory = await getWaterVaporHistory(lat, lng, from, to);
+            const soilHistory = await getSoilHistory(lat, lng, from, to);
+            const weatherHistory = await getWeatherHistory(lat, lng, from, to);
+            timeData = { airQualityHistory, pollenHistory, waterVaporHistory, soilHistory, weatherHistory };
+        }
 
         return res.json({
             lat,
             lng,
             insights: {
-                airQuality,
-                airQualityHistory,
-                fireLatest,
-                pollenForecast,
-                pollenHistory,
-                soilLatest,
-                soilHistory,
-                weatherForecast,
-                weatherHistory,
-                weatherLatest,
-                pollenLatest,
+                current: {
+                    airQuality,
+                    fireLatest,
+                    pollenForecast,
+                    soilLatest,
+                    waterVaporLatest,
+                    weatherForecast,
+                    weatherLatest,
+                    pollenLatest,
+                },
+                time: {
+                    ...timeData,
+                },
             },
         });
     }

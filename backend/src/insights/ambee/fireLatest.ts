@@ -3,13 +3,13 @@ import { AMBEE_API_KEY } from 'src/configuration';
 import { AmbeeError } from '.';
 
 interface FireLatestData {
-    lat: number, 
-    lon: number, 
-    confidence: string,
-    frp: number,
-    daynight: "D" | "N", 
-    detection_time: string,
-    distance: number
+    lat: number;
+    lon: number;
+    confidence: string;
+    frp: number;
+    daynight: 'D' | 'N';
+    detection_time: string;
+    distance: number;
 }
 
 interface FireLatestResponse {

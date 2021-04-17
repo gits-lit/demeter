@@ -3,23 +3,23 @@ import { AMBEE_API_KEY } from 'src/configuration';
 import { AmbeeError } from '.';
 
 interface PollenCount {
-    grass_pollen: number,
-    tree_pollen: number,
-    weed_pollen: number 
+    grass_pollen: number;
+    tree_pollen: number;
+    weed_pollen: number;
 }
 
 interface PollenRisk {
-    grass_pollen: string,
-    tree_pollen: string,
-    weed_pollen: string
+    grass_pollen: string;
+    tree_pollen: string;
+    weed_pollen: string;
 }
 
 interface PollenForecastData {
-    time: number, 
-    lat: number, 
-    lng: number,
-    Count: PollenCount,
-    Risk: PollenRisk
+    time: number;
+    lat: number;
+    lng: number;
+    Count: PollenCount;
+    Risk: PollenRisk;
 }
 
 interface PollenForecastResponse {

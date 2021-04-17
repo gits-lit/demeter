@@ -3,20 +3,20 @@ import { AMBEE_API_KEY } from 'src/configuration';
 import { AmbeeError } from '.';
 
 interface PollenCount {
-    grass_pollen: number,
-    tree_pollen: number,
-    weed_pollen: number 
+    grass_pollen: number;
+    tree_pollen: number;
+    weed_pollen: number;
 }
 
 interface PollenRisk {
-    grass_pollen: string,
-    tree_pollen: string,
-    weed_pollen: string
+    grass_pollen: string;
+    tree_pollen: string;
+    weed_pollen: string;
 }
 
 interface PollenHistoryData {
-    Count: PollenCount,
-    Risk: PollenRisk
+    Count: PollenCount;
+    Risk: PollenRisk;
 }
 
 interface PollenHistoryResponse {
@@ -25,7 +25,12 @@ interface PollenHistoryResponse {
     data: PollenHistoryData[];
 }
 
-export const getPollenHistory = async (lat: number, lng: number, from: string, to: string): Promise<PollenHistoryResponse> => {
+export const getPollenHistory = async (
+    lat: number,
+    lng: number,
+    from: string,
+    to: string,
+): Promise<PollenHistoryResponse> => {
     try {
         const response = await axios.request({
             method: 'GET',

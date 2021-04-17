@@ -3,9 +3,9 @@ import { AMBEE_API_KEY } from 'src/configuration';
 import { AmbeeError } from '.';
 
 interface WaterVaporHistoryData {
-   _id: string,
-   createdAt: string,
-   water_vapor: number
+    _id: string;
+    createdAt: string;
+    water_vapor: number;
 }
 
 interface WaterVaporHistoryResponse {
@@ -14,7 +14,12 @@ interface WaterVaporHistoryResponse {
     data: WaterVaporHistoryData[];
 }
 
-export const getWaterVaporHistory = async (lat: number, lng: number, from: string, to: string): Promise<WaterVaporHistoryResponse> => {
+export const getWaterVaporHistory = async (
+    lat: number,
+    lng: number,
+    from: string,
+    to: string,
+): Promise<WaterVaporHistoryResponse> => {
     try {
         const response = await axios.request({
             method: 'GET',

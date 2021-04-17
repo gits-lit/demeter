@@ -3,10 +3,10 @@ import { AMBEE_API_KEY } from 'src/configuration';
 import { AmbeeError } from '.';
 
 interface SoilLatestData {
-   _id: string,
-   scantime: string,
-   soil_temperature: number,
-   soil_moisture: number 
+    _id: string;
+    scantime: string;
+    soil_temperature: number;
+    soil_moisture: number;
 }
 
 interface SoilLatestResponse {

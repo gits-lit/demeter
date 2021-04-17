@@ -3,28 +3,28 @@ import { AMBEE_API_KEY } from 'src/configuration';
 import { AmbeeError } from '.';
 
 interface WeatherForecastData {
-    lat: number, 
-    lng: number,
-    forecast: WeatherForecast[]
+    lat: number;
+    lng: number;
+    forecast: WeatherForecast[];
 }
 
-interface WeatherForecast{
-    time: number,
-    precipIntensity: number,
-    precipProbability: number,
-    precipType: string,
-    temperature: number,
-    apparentTemperature: number,
-    dewPoint: number,
-    humidity: number,
-    pressure: number, 
-    windSpeed: number, 
-    windGust: number, 
-    windBearing: number, 
-    cloudCover: number, 
-    uvIndex: number, 
-    visibility: number, 
-    ozone: number, 
+interface WeatherForecast {
+    time: number;
+    precipIntensity: number;
+    precipProbability: number;
+    precipType: string;
+    temperature: number;
+    apparentTemperature: number;
+    dewPoint: number;
+    humidity: number;
+    pressure: number;
+    windSpeed: number;
+    windGust: number;
+    windBearing: number;
+    cloudCover: number;
+    uvIndex: number;
+    visibility: number;
+    ozone: number;
 }
 
 interface WeatherForecastResponse {
@@ -33,7 +33,11 @@ interface WeatherForecastResponse {
     data: WeatherForecastData;
 }
 
-export const getWeatherForecast = async (lat: number, lng: number, filter: 'minutely' | 'hourly' | 'daily' = 'hourly'): Promise<WeatherForecastResponse> => {
+export const getWeatherForecast = async (
+    lat: number,
+    lng: number,
+    filter: 'minutely' | 'hourly' | 'daily' = 'hourly',
+): Promise<WeatherForecastResponse> => {
     try {
         const response = await axios.request({
             method: 'GET',

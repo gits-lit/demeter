@@ -8,6 +8,7 @@
     "sourceMap": true,
     "outDir": "build",
     "baseUrl": "src",
+    "resolveJsonModule": true,
     "paths": {
       "*": ["node_modules/*"],
       "src/*": ["./*"]
