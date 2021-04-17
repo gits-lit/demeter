@@ -17,6 +17,7 @@ interface AirQualityStation {
     OZONE: number;
     AQI: number;
     updatedAt: string;
+    aqiInfo: AirQualityInfo;
 }
 
 interface AirQualityResponse {
