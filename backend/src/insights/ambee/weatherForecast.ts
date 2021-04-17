@@ -36,7 +36,7 @@ interface WeatherForecastResponse {
 export const getWeatherForecast = async (
     lat: number,
     lng: number,
-    filter: 'minutely' | 'hourly' | 'daily' = 'hourly',
+    filter: string = 'daily',
 ): Promise<WeatherForecastResponse> => {
     try {
         const response = await axios.request({
