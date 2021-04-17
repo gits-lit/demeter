@@ -110,7 +110,7 @@ router.get('/', async (req: Request, res: Response) => {
             from = ambeeDateParse(from);
             to = ambeeDateParse(to);
         }
-        
+
         let data: any = {};
 
         for (const endpoint of endpoints) {
@@ -118,8 +118,8 @@ router.get('/', async (req: Request, res: Response) => {
                 console.log(`requesting ${endpoint.name} using the api`)
                 const result = await endpoint.api(lat, lng, from, to)
                 const success = !result.error
-                data[endpoint.name] = result;
                 if (success) {
+                    data[endpoint.name] = result;
                     continue;
                 } else {
                     console.log(`request for ${endpoint.name} failed — using cache`)
