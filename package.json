@@ -1,0 +1,21 @@
+{
+  "name": "hackiowa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start" : "concurrently --kill-others \"yarn --cwd ./frontend start\" \"yarn --cwd ./backend dev\"",
+    "frontend": "yarn --cwd ./frontend start",
+    "backend" : "yarn --cwd ./backend dev"
+  },
+  "author": "trulyronak",
+  "license": "ISC",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  }
+}
