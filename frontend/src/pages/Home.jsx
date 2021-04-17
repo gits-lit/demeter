@@ -1,9 +1,11 @@
 import { useState } from 'react';
 
+import Map from 'components/Map';
 import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
-import Map from 'components/Map';
 
+import CurrentlySelected from 'components/CurrentlySelected';
+import Seasons from 'components/Seasons';
 import Timeline from 'components/Timeline';
 
 const HomePage = () => {
@@ -15,6 +17,8 @@ const HomePage = () => {
       <SideBar setSideBarPage={setSideBarPage}/>
       <Map sideBarPage={sideBarPage}/>
       <Timeline />
+      <CurrentlySelected />
+      <Seasons />
     </div>
   )
 }
