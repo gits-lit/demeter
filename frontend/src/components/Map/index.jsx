@@ -53,16 +53,34 @@ const MapComponent = (props) => {
     objects[id] = newObjects;
   }
 
-  const onMapClick = (map, e) => {
-    Object.values(objects).forEach((value) => {
+  const onMapClick = async (map, e) => {
+    Object.values(objects).forEach(async(value) => {
       console.log(value);
       if (e.lngLat.lng < value.maxLat && e.lngLat.lat < value.maxLng && e.lngLat.lat > value.minLng && e.lngLat.lng > value.minLat) {
-        console.log('clicking');
         const newNewCurrentPlot = {...value.currentPlot};
         newNewCurrentPlot.sqFt = Math.floor(measure(value.maxLat, value.maxLng, value.minLat, value.minLng) / 3.2808);
         props.setCurrentPlot(
           newNewCurrentPlot
         );
+
+        const response = await fetch('https://demeter-api-iowa.herokuapp.com/insight/', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            lng: value.centerLng,
+            lat: value.centerLat,
+            from: new Date().toISOString(),
+            to: new Date().toISOString(),
+          }),
+        });
+
+        const data = await response.json();
+        console.log(data);
+        if (!data) throw new Error('Empty response from server');
+        if (data.error) throw new Error(data.error.message);
       }
     })
   }
