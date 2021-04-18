@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { useEffect, useState } from 'react';
 import anime from 'animejs';
+import { notification } from 'antd';
 
 import Map from 'components/Map';
 import NavBar from 'components/NavBar';
@@ -103,34 +104,40 @@ const HomePage = () => {
   }
 
   const flipModal = () => {
-    const currentObjects = Object.values(objects);
-    const tempStatsData = {}
-    for (let i = 0; i < currentObjects.length; i++ ) {
-      const currentObject = currentObjects[i];
-      const sqFt = Math.floor((currentObject.width * currentObject.length) / 3.2808);
+    const currentObjects = Object.values(objects); 
+      const tempStatsData = {}
+      for (let i = 0; i < currentObjects.length; i++ ) {
+        const currentObject = currentObjects[i];
+        const sqFt = Math.floor((currentObject.width * currentObject.length) / 3.2808);
 
-      const acres = AnalysisLib.sqftToAcre(sqFt);
-      console.log(acres);
-      if (currentObject.currentPlot.type === 'crop') {
-        const name = currentObject.currentPlot.name;
-        if (currentObject.currentPlot.name in tempStatsData) {
-          tempStatsData[name] += parseFloat(acres.toFixed(2));
-        } else {
-          tempStatsData[name] = parseFloat(acres.toFixed(2));
+        const acres = AnalysisLib.sqftToAcre(sqFt);
+        console.log(acres);
+        if (currentObject.currentPlot.type === 'crop') {
+          const name = currentObject.currentPlot.name;
+          if (currentObject.currentPlot.name in tempStatsData) {
+            tempStatsData[name] += parseFloat(acres.toFixed(2));
+          } else {
+            tempStatsData[name] = parseFloat(acres.toFixed(2));
+          }
         }
       }
-    }
-    const keys = Object.keys(tempStatsData);
-    const newStatsData = []
-    for (let j = 0; j < keys.length; j++ ) {
-      newStatsData.push({
-        crop: keys[j],
-        acre: tempStatsData[keys[j]]
-      })
-    }
-    setStatsData(d => newStatsData);
-
-    setModal(!visible);
+      const keys = Object.keys(tempStatsData);
+      const newStatsData = []
+      for (let j = 0; j < keys.length; j++ ) {
+        newStatsData.push({
+          crop: keys[j],
+          acre: tempStatsData[keys[j]]
+        })
+      }
+      setStatsData(d => newStatsData);
+      if (currentObjects.length > 1) {
+        setModal(!visible);
+      } else {
+        notification.open({
+          description: "Please place some plots on the map first! I can't analyze empty fields!",
+          placement: 'bottomLeft'
+        });
+      }
   };
 
   const [draw, setDraw] = useState(null);
