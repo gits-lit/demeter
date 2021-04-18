@@ -66,6 +66,13 @@
         "verdict": "Recommended"
     }, 
     {
+        "type": "crop", 
+        "name": "Lettuce", 
+        "earthScore": "78",
+        "state": "Winter",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/4/49/Lettuce_mix.jpg"
+    },
+    {
         "type": "irrigation",
         "name": "Surface",
         "earthScore": "90",
