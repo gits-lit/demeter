@@ -1,8 +1,16 @@
 import { Input } from 'antd';
+import { useHistory } from 'react-router-dom';
 
 import './style.scss';
 
+
 const Landing = () => {
+  let history = useHistory();
+
+  const onSearch = (value) => {
+    history.push('/home');
+  };
+  
   return (
     <div className="Landing">
       <div className="navbar">
@@ -29,6 +37,7 @@ const Landing = () => {
             placeholder="Search for your farmland"
             allowClear
             enterButton="Search"
+            onSearch={onSearch}
             size="large"
           />
         </div>
