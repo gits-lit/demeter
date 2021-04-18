@@ -102,57 +102,61 @@ const handler = async (req: Request, res: Response) => {
             parametersSent: req.body,
         });
     } else {
-        const { lat, lng }: { lat: number; lng: number } = req.body;
-        let from: string, to: string;
-        const usingTimes = !!req.body.from && !!req.body.to;
-        if (usingTimes) {
-            from = ambeeDateParse(from);
-            to = ambeeDateParse(to);
-        }
-
-        let data: any = {};
-
-        // kyle do magic here
-        const soilData = (USE_API) ? await getSoilLatest(lat, lng) : (exampleResponse.insights as any)["soilLatest"]
-        data["soilLatest"] = soilData;
-
-        const aqi = (USE_API) ? await (await getAirQuality(lat, lng)).stations[0].AQI : exampleResponse.insights.airQuality.stations[0].AQI
-        const locScore = LocationGrade.getGrade(aqi);
-        const {score : locationGrade, description:locationDescription} = LocationGrade.numToGrade(locScore)
-
-        const envgradeScore = EnvironmentGrade.getGrade(soilData.data[0].soil_moisture, soilData.data[0].soil_temperature);
-        const {score: environmentGrade, description: environmentDescription} = EnvironmentGrade.numToGrade(envgradeScore);
-        console.log(locationDescription)
-        for (const endpoint of endpoints) {
-            if (["soilLatest"].includes(endpoint.name)) {
-                // skip these since we already did the analysis
-                continue;
-            } else if (req.body[endpoint.name] == 'API') {
-                console.log(`requesting ${endpoint.name} using the api`)
-                const result = await endpoint.api(lat, lng, from, to)
-                const success = !result.error
-                if (success) {
-                    data[endpoint.name] = result;
-                    continue;
-                } else {
-                    console.log(`request for ${endpoint.name} failed — using cache`)
-                }       
+        try {
+            const { lat, lng }: { lat: number; lng: number } = req.body;
+            let from: string, to: string;
+            const usingTimes = !!req.body.from && !!req.body.to;
+            if (usingTimes) {
+                from = ambeeDateParse(from);
+                to = ambeeDateParse(to);
             }
-            console.log(`using cached data from ${endpoint.name}`)
-            data[endpoint.name] = (exampleResponse.insights as any)[endpoint.name]            
-        }
 
-        return res.json({
-            lat,
-            lng,
-            environment: {
-                environmentGrade, environmentDescription
-            },
-            location: {
-                locationGrade, locationDescription
-            },
-            insights: data
-        });
+            let data: any = {};
+
+            // kyle do magic here
+            const soilData = (USE_API) ? await getSoilLatest(lat, lng) : (exampleResponse.insights as any)["soilLatest"]
+            data["soilLatest"] = soilData;
+
+            const aqi = (USE_API) ? await (await getAirQuality(lat, lng)).stations[0].AQI : exampleResponse.insights.airQuality.stations[0].AQI
+            const locScore = LocationGrade.getGrade(aqi);
+            const {score : locationGrade, description:locationDescription} = LocationGrade.numToGrade(locScore)
+
+            const envgradeScore = EnvironmentGrade.getGrade(soilData.data[0].soil_moisture, soilData.data[0].soil_temperature);
+            const {score: environmentGrade, description: environmentDescription} = EnvironmentGrade.numToGrade(envgradeScore);
+            console.log(locationDescription)
+            for (const endpoint of endpoints) {
+                if (["soilLatest"].includes(endpoint.name)) {
+                    // skip these since we already did the analysis
+                    continue;
+                } else if (req.body[endpoint.name] == 'API') {
+                    console.log(`requesting ${endpoint.name} using the api`)
+                    const result = await endpoint.api(lat, lng, from, to)
+                    const success = !result.error
+                    if (success) {
+                        data[endpoint.name] = result;
+                        continue;
+                    } else {
+                        console.log(`request for ${endpoint.name} failed — using cache`)
+                    }       
+                }
+                console.log(`using cached data from ${endpoint.name}`)
+                data[endpoint.name] = (exampleResponse.insights as any)[endpoint.name]            
+            }
+
+            return res.json({
+                lat,
+                lng,
+                environment: {
+                    environmentGrade, environmentDescription
+                },
+                location: {
+                    locationGrade, locationDescription
+                },
+                insights: data
+            });
+        } catch (err) {
+            return res.json(exampleResponse)
+        }
     }
 };
 
