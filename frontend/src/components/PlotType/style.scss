@@ -69,9 +69,19 @@
   }
 
   .plots {
+    bottom: 0;
+    height: 28vh;
     margin: auto;
     margin-top: 20px;
     overflow: scroll;
-    width: 95%;
+    padding: 10px 2.5%;
+    position: absolute;
+    scrollbar-width: none;
+    width: 100%;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }

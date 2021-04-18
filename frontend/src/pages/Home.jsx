@@ -35,6 +35,13 @@ const HomePage = () => {
       state: 'Medium',
       image: 'https://i.imgur.com/tdBE8nd.png'
     },
+    {
+      type: 'irrigation',
+      name: 'Drip',
+      earthScore: '51',
+      state: 'Medium',
+      image: 'https://i.imgur.com/tdBE8nd.png'
+    },
   ])
 
   return (
