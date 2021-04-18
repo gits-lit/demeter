@@ -121,7 +121,7 @@ const handler = async (req: Request, res: Response) => {
         data["soilLatest"] = soilData;
 
         const magicNumber = getGrade(soilData.data[0].soil_moisture, soilData.data[0].soil_temperature);
-        const grade = numToGrade(magicNumber);
+        const {score: environmentGrade, description} = numToGrade(magicNumber);
 
         for (const endpoint of endpoints) {
             if (["soilLatest"].includes(endpoint.name)) {
@@ -147,7 +147,8 @@ const handler = async (req: Request, res: Response) => {
             lat,
             lng,
             insights: data,
-            areaGrade: grade
+            environmentGrade,
+            description
         });
     }
 };

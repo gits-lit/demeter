@@ -5,6 +5,27 @@ import redo from '../../../assets/redo.svg';
 import './style.scss';
 
 const CropRotation = (props) => {
+
+    const exampleInput = [
+        {
+          crop: "Corn",
+          acre: 120
+        },
+        {
+          crop: "Strawberry",
+          acre: 30
+        },
+        {
+          crop: "Rice",
+          acre: 60
+        },
+        {
+          crop: "Wheat",
+          acre: 54
+        },
+      ];
+
+
   return (
     <div className="CropRotation">
       <h3 className="stat-title">Crop Rotations</h3>
