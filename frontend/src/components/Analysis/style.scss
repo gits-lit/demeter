@@ -1,0 +1,37 @@
+.analysis {
+  position: absolute;
+  top: 10vh;
+  height: 50vh;
+  left: 52vw;
+  width: 48vw;
+
+  .cards {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .heading {
+    align-items: center;
+    display: flex;
+
+    .text {
+      margin-left: 10px;
+
+      h1 {
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 100%;
+        margin: 0;
+      }
+
+      h2 {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 100%;
+        margin: 0;
+      }
+    }
+  }
+}

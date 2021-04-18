@@ -8,6 +8,7 @@ import CurrentlySelected from 'components/CurrentlySelected';
 import Seasons from 'components/Seasons';
 import Timeline from 'components/Timeline';
 
+import Analysis from 'components/Analysis';
 import PlotType from 'components/PlotType';
 import BigCurrentlySelected from 'components/BigCurrentlySelected';
 
@@ -16,6 +17,7 @@ const HomePage = () => {
   const [currentPlot, setCurrentPlot] = useState({});
   const [plots, setPlotOptions] = useState([]);
   const [draw, setDraw] = useState(null);
+  const [analysis, setAnalysis] = useState({});
 
   useEffect(async () => {
     const response = await fetch('https://demeter-api-iowa.herokuapp.com/data/earth', {
@@ -38,12 +40,13 @@ const HomePage = () => {
     <div>
       <NavBar />
       <SideBar setSideBarPage={setSideBarPage}/>
-      <Map setCurrentPlot={setCurrentPlot} currentPlot={currentPlot} draw={draw} sideBarPage={sideBarPage} setDraw={setDraw}/>
+      <Map setAnalysis={setAnalysis} setCurrentPlot={setCurrentPlot} currentPlot={currentPlot} draw={draw} sideBarPage={sideBarPage} setDraw={setDraw}/>
       <Timeline />
       <CurrentlySelected currentPlot={currentPlot}/>
       <Seasons />
       <PlotType draw={draw} plots={plots} setCurrentPlot={setCurrentPlot}/>
       <BigCurrentlySelected currentPlot={currentPlot}/>
+      <Analysis analysis={analysis}/>
     </div>
   )
 }
