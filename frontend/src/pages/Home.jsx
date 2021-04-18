@@ -23,8 +23,10 @@ const HomePage = () => {
     setModal(!visible);
   };
 
+  const [draw, setDraw] = useState(null);
+
   useEffect(async () => {
-    const response = await fetch('http://35c83b560c8a.ngrok.io/data/earth', {
+    const response = await fetch('https://demeter-api-iowa.herokuapp.com/data/earth', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -43,13 +45,14 @@ const HomePage = () => {
   return (
     <div>
       <StatsModal visible={visible} setModal={flipModal} />
-      <SideBar setSideBarPage={setSideBarPage} setModal={flipModal} />
-      <Map sideBarPage={sideBarPage} />
+      <NavBar />
+      <SideBar setSideBarPage={setSideBarPage}/>
+      <Map setCurrentPlot={setCurrentPlot} currentPlot={currentPlot} draw={draw} sideBarPage={sideBarPage} setDraw={setDraw}/>
       <Timeline />
       <CurrentlySelected currentPlot={currentPlot} />
       <Seasons />
-      <PlotType plots={plots} setCurrentPlot={setCurrentPlot} />
-      <BigCurrentlySelected currentPlot={currentPlot} />
+      <PlotType draw={draw} plots={plots} setCurrentPlot={setCurrentPlot}/>
+      <BigCurrentlySelected currentPlot={currentPlot}/>
     </div>
   );
 };

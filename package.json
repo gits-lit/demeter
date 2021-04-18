@@ -16,7 +16,8 @@
   "private": true,
   "workspaces": [
     "backend",
-    "frontend"
+    "frontend",
+    "analysis"
   ],
   "dependencies": {
     "concurrently": "^6.0.2"
