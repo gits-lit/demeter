@@ -26,13 +26,16 @@ const HomePage = () => {
   const [draw, setDraw] = useState(null);
 
   useEffect(async () => {
-    const response = await fetch('https://demeter-api-iowa.herokuapp.com/data/earth', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      'https://demeter-api-iowa.herokuapp.com/data/earth',
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     const data = await response.json();
     console.log(data);
@@ -46,13 +49,19 @@ const HomePage = () => {
     <div>
       <StatsModal visible={visible} setModal={flipModal} />
       <NavBar />
-      <SideBar setSideBarPage={setSideBarPage}/>
-      <Map setCurrentPlot={setCurrentPlot} currentPlot={currentPlot} draw={draw} sideBarPage={sideBarPage} setDraw={setDraw}/>
+      <SideBar setSideBarPage={setSideBarPage} setModal={flipModal} />
+      <Map
+        setCurrentPlot={setCurrentPlot}
+        currentPlot={currentPlot}
+        draw={draw}
+        sideBarPage={sideBarPage}
+        setDraw={setDraw}
+      />
       <Timeline />
       <CurrentlySelected currentPlot={currentPlot} />
       <Seasons />
-      <PlotType draw={draw} plots={plots} setCurrentPlot={setCurrentPlot}/>
-      <BigCurrentlySelected currentPlot={currentPlot}/>
+      <PlotType draw={draw} plots={plots} setCurrentPlot={setCurrentPlot} />
+      <BigCurrentlySelected currentPlot={currentPlot} />
     </div>
   );
 };
