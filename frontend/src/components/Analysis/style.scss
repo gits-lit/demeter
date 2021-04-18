@@ -79,26 +79,5 @@
     }
   }
 
-  .overall-breakdown {
-    display: inline-block;
-    background: #F9F9F9;
-    border: 1px solid #DFDFDF;
-    box-sizing: border-box;
-    border-radius: 4.35px;
-    height: 17vh;
-    width: 26.8vw;
-    margin-top: 2vh;
-    margin-left: 1.4vw;
-    padding: 5px 10px;
-    overflow: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    h3 {
-      font-size: 18px;
-    }
-  }
 
-  .overall-breakdown::-webkit-scrollbar {
-    display: none;
-  }
 }

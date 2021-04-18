@@ -6,6 +6,7 @@ import CropRotation from '../Statistics/CropRotation';
 import EstimatedFinancials from '../Statistics/EstimatedFinancials';
 import EnvironmentalStrain from '../Statistics/EnvironmentalStrain';
 import FarmBreakdown from '../Statistics/FarmBreakdown';
+import Breakdowns from '../Analysis/Breakdowns';
 
 import title from '../../assets/harveststats.svg';
 import './style.scss';
@@ -51,8 +52,8 @@ const StatsModal = (props) => {
       >
         <img className="title" src={title} alt="title" />
         <div className="tstats-container">
-          <h1>Placeholder</h1>
-          <h1>Placeholder</h1>
+          <Breakdowns title="Overall Breakdown" grade="A-" />
+          <Breakdowns title="Overall Breakdown" grade="A-" />
 
           <FarmBreakdown />
         </div>
