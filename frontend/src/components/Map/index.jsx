@@ -91,6 +91,33 @@ const MapComponent = (props) => {
         if (!data) throw new Error('Empty response from server');
         if (data.error) throw new Error(data.error.message);
 
+        const environment = data.environment;
+        const location = data.location;
+        let grade = 'A';
+        if (environment.environmentGrade < 2) {
+          grade = 'F';
+        } else if (environment.environmentGrade < 5) {
+          grade = 'D'
+        } else if (environment.environmentGrade < 7) {
+          grade = 'C'
+        } else if (environment.environmentGrade < 9) {
+          grade = 'B'
+        }
+        let grade2 = 'A';
+        if (location.locationGrade < 2) {
+          grade2 = 'F';
+        } else if (location.locationGrade < 5) {
+          grade2 = 'D'
+        } else if (location.locationGrade < 7) {
+          grade2 = 'C'
+        } else if (location.locationGrade < 9) {
+          grade2 = 'B'
+        }
+        props.setEnvironmentDescription(environment.environmentDescription);
+        props.setEnvironmentScore(grade);
+        props.setLocationDescription(location.locationDescription);
+        props.setLocationScore(grade2);
+
         const insights = data.insights;
 
         let soilTemp = null;

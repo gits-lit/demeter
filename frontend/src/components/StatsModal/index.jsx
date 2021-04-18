@@ -54,17 +54,16 @@ const StatsModal = (props) => {
         <div className="tstats-container">
           <Breakdowns
             title="Location Score"
-            grade="A-"
+            grade={props.locationScore}
             criteria="Criteria based on soil quality, moisture, and
             overall location."
-            explanation="This place is great overall, the soil temperature is lower than average so look into buying extra fertilizer during the Summer!"
+            explanation={props.locationDescription}
           />
           <Breakdowns
             title="Environmental Impact"
-            grade="A-"
-            criteria="Criteria based on soil quality, moisture, and
-            overall location."
-            explanation="This place is great overall, the soil temperature is lower than average so look into buying extra fertilizer during the Summer!"
+            grade={props.environmentScore}
+            criteria="Criteria based on a plot's effect on the environment."
+            explanation={props.environmentDescription}
           />
 
           <FarmBreakdown statsData={props.statsData}/>

@@ -28,6 +28,10 @@ const HomePage = () => {
   const [statsData, setStatsData] = useState([]);
   const [objects, setNewObjects] = useState({});
   const [day, setDay] = useState(108);
+  const [environmentScore, setEnvironmentScore] = useState ('?');
+  const [environmentDescription, setEnvironmentDescription] = useState('Click on a land plot to get your farm judged by Demeter.')
+  const [locationScore, setLocationScore] = useState ('?');
+  const [locationDescription, setLocationDescription] = useState('Click on a land plot to get your farm judged by Demeter.')
 
   const newSetSideBarPage = (sideBarPageParam) => {
     console.log(sideBarPageParam);
@@ -212,7 +216,13 @@ const HomePage = () => {
 
   return (
     <div>
-      <StatsModal visible={visible} setModal={flipModal} statsData={statsData}/>
+      <StatsModal
+        locationDescription={locationDescription}
+        locationScore={locationScore}
+        environmentScore={environmentScore}
+        environmentDescription={environmentDescription}
+        visible={visible} setModal={flipModal}
+        statsData={statsData}/>
       <NavBar />
       <SideBar setSideBarPage={newSetSideBarPage} setModal={flipModal} />
       <Map
@@ -224,13 +234,20 @@ const HomePage = () => {
         setDraw={setDraw}
         setAnalysis={setAnalysis}
         setNewObjects={setNewObjects}
+        setEnvironmentScore={setEnvironmentScore}
+        setEnvironmentDescription={setEnvironmentDescription}
+        setLocationScore={setLocationScore}
+        setLocationDescription={setLocationDescription}
       />
       <Timeline setDay={setDay} objects={objects} day={day}/>
       <CurrentlySelected currentPlot={currentPlot} />
       <Seasons day={day}/>
       <PlotType draw={draw} plots={plots} setCurrentPlot={setCurrentPlot}/>
       <BigCurrentlySelected currentPlot={currentPlot}/>
-      <Analysis analysis={analysis}/>
+      <Analysis
+        locationDescription={locationDescription}
+        locationScore={locationScore}
+       analysis={analysis}/>
       <Date day={day}/>
     </div>
   );

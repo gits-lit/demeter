@@ -130,8 +130,8 @@ const Analysis = (props) => {
       </div>
       <Breakdowns
         title="Overall Breakdown"
-        grade="A-"
-        explanation="This place is great overall, the soil temperature is lower than average so look into buying extra fertilizer during the Summer!"
+        grade={props.locationScore}
+        explanation={props.locationDescription}
       />
     </div>
   );

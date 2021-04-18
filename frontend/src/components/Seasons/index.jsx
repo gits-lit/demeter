@@ -26,29 +26,29 @@ const Seasons = (props) => {
   const [low, setLow] = useState('39');
   const [allWeather, setWeather] = useState([
     {
-      avgTemp: '90',
-      date: 'April 18',
-      weather: 'cloudy'
-    },
-    {
-      avgTemp: '90',
+      avgTemp: '41°',
       date: 'April 19',
       weather: 'rainy'
     },
     {
-      avgTemp: '90',
+      avgTemp: '46°',
       date: 'April 20',
       weather: 'cloudy'
     },
     {
-      avgTemp: '90',
+      avgTemp: '49°',
       date: 'April 21',
-      weather: 'sunny'
+      weather: 'cloudy'
     },
     {
-      avgTemp: '90',
+      avgTemp: '59°',
       date: 'April 22',
       weather: 'cloudy'
+    },
+    {
+      avgTemp: '58°',
+      date: 'April 23',
+      weather: 'rainy'
     }
   ])
 
@@ -66,6 +66,8 @@ const Seasons = (props) => {
       weather3 = 'rainy';
       weather4 = 'cloudy';
       weather5 = 'cloudy'
+      setHigh(Math.floor(multiplier + Math.random() * 10));
+      setLow(Math.floor(multiplier - Math.random() * 10));
     } else if (realDay >= 171 && realDay < 265) {
       setSeason('Summer ' + year);
       setColor('rgba(237, 193, 81, 1)');
@@ -74,6 +76,8 @@ const Seasons = (props) => {
       weather3 = 'sunny';
       weather4 = 'sunny';
       weather5 = 'sunny';
+      setHigh(Math.floor(multiplier + Math.random() * 10));
+      setLow(Math.floor(multiplier - Math.random() * 10));
     } else if (realDay >= 265 && realDay < 355) {
       setSeason('Fall ' + year);
       setColor('rgba(237, 193, 81, 1)');
@@ -83,6 +87,8 @@ const Seasons = (props) => {
       weather3 = 'cloudy';
       weather4 = 'cloudy';
       weather5 = 'cloudy';
+      setHigh(Math.floor(multiplier + Math.random() * 10));
+      setLow(Math.floor(multiplier - Math.random() * 10));
     } else {
       setSeason('Winter ' + year);
       setColor('rgba(64, 145, 220, 1)');
@@ -92,6 +98,8 @@ const Seasons = (props) => {
       weather3 = 'rainy';
       weather4 = 'rainy';
       weather5 = 'rainy';
+      setHigh(Math.floor(multiplier + Math.random() * 10));
+      setLow(Math.floor(multiplier - Math.random() * 10));
     }
 
     setWeather([
