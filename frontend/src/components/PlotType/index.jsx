@@ -64,6 +64,9 @@ const PlotType = (props) => {
                 type={plot.type}
                 onClick={() => {
                   props.setCurrentPlot(plot);
+                  if (props.draw) {
+                    props.draw.draw.changeMode('draw_rectangle');
+                  }
                 }}
               />
             )

@@ -15,6 +15,7 @@ const HomePage = () => {
   const [sideBarPage, setSideBarPage] = useState('map');
   const [currentPlot, setCurrentPlot] = useState({});
   const [plots, setPlotOptions] = useState([]);
+  const [draw, setDraw] = useState(null);
 
   useEffect(async () => {
     const response = await fetch('https://demeter-api-iowa.herokuapp.com/data/earth', {
@@ -37,11 +38,11 @@ const HomePage = () => {
     <div>
       <NavBar />
       <SideBar setSideBarPage={setSideBarPage}/>
-      <Map sideBarPage={sideBarPage}/>
+      <Map draw={draw} sideBarPage={sideBarPage} setDraw={setDraw}/>
       <Timeline />
       <CurrentlySelected currentPlot={currentPlot}/>
       <Seasons />
-      <PlotType plots={plots} setCurrentPlot={setCurrentPlot}/>
+      <PlotType draw={draw} plots={plots} setCurrentPlot={setCurrentPlot}/>
       <BigCurrentlySelected currentPlot={currentPlot}/>
     </div>
   )
