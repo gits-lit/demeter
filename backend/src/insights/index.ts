@@ -113,9 +113,19 @@ router.get('/', async (req: Request, res: Response) => {
         }
 
         let data: any = {};
+        
+        const specific = await getAirQuality(lat, lng);
+        data["getAirQuality"] = specific;
+        specific.stations[0].CO;
+
+        
+        // kyle do magic here
+
 
         for (const endpoint of endpoints) {
-            if (req.body[endpoint.name] == 'API') {
+            if (["getAirQuality"].includes(endpoint.name)) {
+                // skip these since we already did the analysis
+            } else if (req.body[endpoint.name] == 'API') {
                 console.log(`requesting ${endpoint.name} using the api`)
                 const result = await endpoint.api(lat, lng, from, to)
                 const success = !result.error
@@ -128,6 +138,8 @@ router.get('/', async (req: Request, res: Response) => {
             }
             console.log(`using cached data from ${endpoint.name}`)
             data[endpoint.name] = (exampleResponse.insights as any)[endpoint.name]
+
+            
         }
         return res.json({
             lat,
