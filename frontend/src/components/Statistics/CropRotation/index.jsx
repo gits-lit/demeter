@@ -43,7 +43,7 @@ const CropRotation = (props) => {
         <p>Recommended Rotations</p>
       </strong>
       <div className="resize">
-        <Plot type={"crop"} state={currentData.currentCrop.state} name={currentData.currentCrop.name} earthScore={currentData.currentCrop.earthScore} />
+        <Plot type={"crop"} image={currentData.currentCrop.image} state={currentData.currentCrop.state} name={currentData.currentCrop.name} earthScore={currentData.currentCrop.earthScore} />
       </div>
       <h3 style={{ textAlign: "center" }}>
         <span style={{ marginRight: "8px" }}>
@@ -52,7 +52,7 @@ const CropRotation = (props) => {
         Rotates To
       </h3>
       <div className="resize">
-      <Plot type={"crop"} state={currentData.newCrop.state} name={currentData.newCrop.name} earthScore={currentData.newCrop.earthScore} />
+      <Plot type={"crop"} state={currentData.newCrop.state} image={currentData.newCrop.image} name={currentData.newCrop.name} earthScore={currentData.newCrop.earthScore} />
       </div>
      
       <div className="buttons">
