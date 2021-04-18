@@ -47,6 +47,7 @@ const MapComponent = (props) => {
   const right = (props.sideBarPage !== 'map') ? '-25vw' : '0vw';
 
   const [center, setCenter] = useState([-92.0717042, 42.0434796]);
+  const [zoom, setZoom] = useState([13]);
 
   useEffect(() => {
     day = props.day;
@@ -246,7 +247,7 @@ const MapComponent = (props) => {
       pitch = {[50]}
       // eslint-disable-next-line
       style="mapbox://styles/mapbox/satellite-v9"
-      zoom = {[13]}
+      zoom = {zoom}
     >
       <DrawControl
         userProperties={true}
