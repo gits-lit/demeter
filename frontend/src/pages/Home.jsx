@@ -19,28 +19,33 @@ const HomePage = () => {
       name: 'Strawberry',
       earthScore: '86',
       state: 'Summer',
-      image: 'https://i.imgur.com/u0rOCBQ.png'
+      image: 'https://i.imgur.com/u0rOCBQ.png',
+      summary: 'Strawberries are low-growing herbaceous plants with a fibrous root system and a crown from which arise basal leaves',
+      environmentalImpact: 'Medium',
+      cost: '$232/sqft',
+      verdict: 'Highly Recommended'
     },
     {
       type: 'crop',
       name: 'Corn',
       earthScore: '72',
       state: 'Fall',
-      image: 'https://i.imgur.com/Fm1Svvq.png'
+      image: 'https://i.imgur.com/Fm1Svvq.png',
+      summary: 'Corn is a cereal grain first domesticated by indigenous peoples in southern Mexico about 10,000 years ago',
+      environmentalImpact: 'Medium',
+      cost: '$232/sqft',
+      verdict: 'Highly Recommended'
     },
     {
       type: 'irrigation',
       name: 'Drip',
       earthScore: '51',
       state: 'Medium',
-      image: 'https://i.imgur.com/tdBE8nd.png'
-    },
-    {
-      type: 'irrigation',
-      name: 'Drip',
-      earthScore: '51',
-      state: 'Medium',
-      image: 'https://i.imgur.com/tdBE8nd.png'
+      image: 'https://i.imgur.com/tdBE8nd.png',
+      summary: 'Drip irrigation is a type of micro-irrigation system that has the potential to save water and nutrients by allowing water to drip slowly to the roots of plants',
+      environmentalImpact: 'Medium',
+      cost: '$232/sqft',
+      verdict: 'Highly Recommended'
     },
   ])
 
