@@ -23,6 +23,7 @@ const scoreToDescription = (score: Score): string => {
         case Score.D, Score["D+"]: return "Some members of the general public may experience health effects; members of sensitive groups may experience more serious health effects."
         case Score.F: return "Health alert: The risk of health effects is increased for everyone."
     }
+    return "Air quality is satisfactory, and air pollution poses little or no risk."
 }
 
 export const numToGrade = (score: number): Grade => {

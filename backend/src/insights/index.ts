@@ -122,7 +122,7 @@ const handler = async (req: Request, res: Response) => {
 
         const envgradeScore = EnvironmentGrade.getGrade(soilData.data[0].soil_moisture, soilData.data[0].soil_temperature);
         const {score: environmentGrade, description: environmentDescription} = EnvironmentGrade.numToGrade(envgradeScore);
-        console.log(environmentGrade)
+        console.log(locationDescription)
         for (const endpoint of endpoints) {
             if (["soilLatest"].includes(endpoint.name)) {
                 // skip these since we already did the analysis
