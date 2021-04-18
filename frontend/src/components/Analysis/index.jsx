@@ -6,7 +6,7 @@ import Card from './Card';
 
 const Analysis = (props) => {
   return (
-    <div className="analysis">
+    <div className="analysis right-into">
       <div className="heading">
         <img src={analysis} alt="sprout icon"/>
         <div className="text">
@@ -54,7 +54,7 @@ const Analysis = (props) => {
           }}>{props.analysis.pollen || 'N/A'}</h2>
         </Card>
       </div>
-      <div className="air-quality">
+      <div className="air-quality fade-up">
         <h3>Air Quality Breakdown</h3>
         <div className="section">
           <p>Air Quality Index</p>
@@ -87,7 +87,7 @@ const Analysis = (props) => {
           <hr />
         </div>
       </div>
-      <div className="overall-breakdown">
+      <div className="overall-breakdown fade-up">
         <h3>Overall Breakdown</h3>
       </div>
     </div>

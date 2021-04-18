@@ -2,7 +2,7 @@
   position: absolute;
   top: 10vh;
   height: 50vh;
-  left: 52vw;
+  left: calc(52vw + 1200px);
   width: 48vw;
 
   .cards {
@@ -37,13 +37,14 @@
 
   .air-quality {
     display: inline-block;
+    opacity: 0;
     background: #F9F9F9;
     border: 1px solid #DFDFDF;
     box-sizing: border-box;
     border-radius: 4.35px;
     height: 8vw;
     width: 17.4vw;
-    margin-top: 2vh;
+    margin-top: calc(2vh + 10px);
     margin-left: .6vw;
     padding: 5px 10px;
     overflow: scroll;
@@ -80,6 +81,7 @@
   }
 
   .overall-breakdown {
+    opacity: 0;
     display: inline-block;
     background: #F9F9F9;
     border: 1px solid #DFDFDF;
@@ -87,7 +89,7 @@
     border-radius: 4.35px;
     height: 8vw;
     width: 26.8vw;
-    margin-top: 2vh;
+    margin-top: calc(2vh + 10px);
     margin-left: 1.4vw;
     padding: 5px 10px;
     overflow: scroll;

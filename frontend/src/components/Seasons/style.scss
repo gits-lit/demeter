@@ -5,9 +5,9 @@
   height: 9vh;
   left: 6vw;
   position: absolute;
-  top: 9vh;
+  top: calc(9vh - 200px);
   width: 45vw;
-  z-index: 900;
+  z-index: 800;
 
   h1 {
     color: white;
