@@ -15,7 +15,7 @@ import { getWeatherHistory } from './ambee/weatherHistory';
 import { getWeatherLatest } from './ambee/weatherLatest';
 import { getPollenLatest } from './ambee/pollenLatest';
 import weatherRouter from './weather'
-import { USE_API } from 'src/configuration';
+import { AMBEE_API_KEY, USE_API } from 'src/configuration';
 import exampleResponse from '../data/perfectResponse.json';
 import { getGrade, numToGrade } from '../utils/getGrade';
 
@@ -114,19 +114,17 @@ const handler = async (req: Request, res: Response) => {
         }
 
         let data: any = {};
-        
-        const specific = await getAirQuality(lat, lng);
-        data["airQuality"] = specific;
 
         // kyle do magic here
         const weights = [0.1,0.9];
-        const soilData = await getSoilLatest(lat, lng);
+        const soilData = (USE_API) ? await getSoilLatest(lat, lng) : (exampleResponse.insights as any)["soilLatest"]
         data["soilLatest"] = soilData;
+
         const magicNumber = getGrade(soilData.data[0].soil_moisture, soilData.data[0].soil_temperature);
         const grade = numToGrade(magicNumber);
 
         for (const endpoint of endpoints) {
-            if (["airQuality", "soilLatest"].includes(endpoint.name)) {
+            if (["soilLatest"].includes(endpoint.name)) {
                 // skip these since we already did the analysis
                 continue;
             } else if (req.body[endpoint.name] == 'API') {
