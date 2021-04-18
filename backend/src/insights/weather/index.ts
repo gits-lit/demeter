@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { Router, Request, Response } from 'express';
 import { validationResult, check } from 'express-validator';
-import { WEATHER_API_KEY } from 'src/configuration';
-import { handleError } from 'src/utils/handleError';
+import { WEATHER_API_KEY, USE_API } from 'src/configuration';
 import { weatherDateParse } from 'src/utils/parseDate';
+import weatherResponse from "src/data/weatherResponse.json"
 
 const router = Router();
 router.get('/', async (req: Request, res: Response) => {
@@ -26,15 +26,19 @@ router.get('/', async (req: Request, res: Response) => {
         const to = weatherDateParse(req.body.to)
 
         try {
+            if (!USE_API) { 
+                throw new Error("Problems")
+            }
             const result = await getWeatherForecast(from, to);
-    
             return res.json({
                 from,
                 to,
-                weather: result,
+                weather: "result",
             });
         } catch (err) {
-            return handleError("Weather Died", err, req, res);
+            // return cached data
+            console.log("Using cached response")
+            return res.json(weatherResponse)
         }
     }
 });
