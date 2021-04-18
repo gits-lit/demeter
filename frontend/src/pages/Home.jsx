@@ -38,7 +38,7 @@ const HomePage = () => {
     <div>
       <NavBar />
       <SideBar setSideBarPage={setSideBarPage}/>
-      <Map draw={draw} sideBarPage={sideBarPage} setDraw={setDraw}/>
+      <Map currentPlot={currentPlot} draw={draw} sideBarPage={sideBarPage} setDraw={setDraw}/>
       <Timeline />
       <CurrentlySelected currentPlot={currentPlot}/>
       <Seasons />

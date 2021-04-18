@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactMapboxGl from 'react-mapbox-gl';
 import DrawRectangle, {
   DrawStyles
@@ -6,7 +6,22 @@ import DrawRectangle, {
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import DrawControl from "react-mapbox-draw-rectangle";
 
+import { loadLocation } from './utils.js';
 import './style.scss';
+
+
+let color = 'rgba(64, 145, 220, 1)';
+function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+  var R = 6378.137; // Radius of earth in KM
+  var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+  var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+  Math.sin(dLon/2) * Math.sin(dLon/2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c;
+  return d * 1000; // meters
+}
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -35,10 +50,52 @@ const MapComponent = (props) => {
     window.map = map;
   }
 
+  useEffect(() => {
+    if (props.currentPlot && props.currentPlot.type === 'crop') { 
+      if (props.currentPlot.state === 'Spring' || props.currentPlot.state === 'Summer') {
+        color = 'rgba(39, 174, 96, 1)';
+      } else {
+        color = 'rgba(237, 193, 81, 1)';
+      }
+    } else {
+      color = 'rgba(64, 145, 220, 1)';
+    }
+  }, [props.currentPlot])
+
   const onDrawCreate = ({ features }) => {
     console.log(features);
     if (features.length >= 1) {
-      if (ourDraw) {
+      let maxLat = -1;
+      let maxLng = -1;
+      let minLat = 1000;
+      let minLng = 1000;
+      for (let i = 0; i < features[0].geometry.coordinates[0].length; i++) {
+        maxLat = Math.max(Math.abs(features[0].geometry.coordinates[0][i][0]), maxLat);
+        maxLng = Math.max(Math.abs(features[0].geometry.coordinates[0][i][1]), maxLng);
+        minLat = Math.min(Math.abs(features[0].geometry.coordinates[0][i][0]), minLat);
+        minLng = Math.min(Math.abs(features[0].geometry.coordinates[0][i][1]), minLng);
+      }
+      const width = measure(0, maxLat, 0, minLat);
+      const length = measure(maxLng, 0, minLng, 0);
+      console.log(maxLat);
+      console.log(maxLng);
+      console.log(minLat);
+      console.log(minLng);
+      let centerLat = (maxLat + minLat) / 2;
+      let centerLng = (maxLng + minLng) / 2;
+      if (features[0].geometry.coordinates[0][0][0] < 0) {
+        centerLat = -centerLat;
+      }
+      if (features[0].geometry.coordinates[0][0][1] < 0) {
+        centerLng = -centerLng;
+      }
+      
+      if (window.map) {
+        console.log(features[0].id)
+        loadLocation(window.map, centerLat, centerLng, features[0].id, width, length, color)
+      }
+
+      if (ourDraw && features[0].id) {
         const currentId = features[0].id;
         ourDraw.draw.delete(currentId);
       }
