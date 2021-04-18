@@ -28,6 +28,7 @@ const Plot = (props) => {
   return (
     <div
       className="plot"
+      onClick={props.onClick}
       style={{
         backgroundImage: `linear-gradient(to right, ${color} 65%, rgba(178, 178, 178, 0)), url(${props.image})`,
         border: `1px solid ${borderColor}`,

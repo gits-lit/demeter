@@ -7,10 +7,13 @@ import SideBar from 'components/SideBar';
 import CurrentlySelected from 'components/CurrentlySelected';
 import Seasons from 'components/Seasons';
 import Timeline from 'components/Timeline';
+
 import PlotType from 'components/PlotType';
+import BigCurrentlySelected from 'components/BigCurrentlySelected';
 
 const HomePage = () => {
   const [sideBarPage, setSideBarPage] = useState('map');
+  const [currentPlot, setCurrentPlot] = useState({});
 
   // State in case we store these to backend later.
   const [plots, setPlotOptions] = useState([
@@ -55,9 +58,10 @@ const HomePage = () => {
       <SideBar setSideBarPage={setSideBarPage}/>
       <Map sideBarPage={sideBarPage}/>
       <Timeline />
-      <CurrentlySelected />
+      <CurrentlySelected currentPlot={currentPlot}/>
       <Seasons />
-      <PlotType plots={plots}/>
+      <PlotType plots={plots} setCurrentPlot={setCurrentPlot}/>
+      <BigCurrentlySelected currentPlot={currentPlot}/>
     </div>
   )
 }

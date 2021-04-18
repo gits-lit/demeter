@@ -62,6 +62,9 @@ const PlotType = (props) => {
                 image={plot.image}
                 state={plot.state}
                 type={plot.type}
+                onClick={() => {
+                  props.setCurrentPlot(plot);
+                }}
               />
             )
           }
