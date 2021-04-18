@@ -34,4 +34,50 @@
       }
     }
   }
+
+  .air-quality {
+    display: inline-block;
+    background: #F9F9F9;
+    border: 1px solid #DFDFDF;
+    box-sizing: border-box;
+    border-radius: 4.35px;
+    height: 17vh;
+    width: 17.4vw;
+    margin-top: 2vh;
+    margin-left: .6vw;
+    padding: 5px 10px;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
+
+    .section {
+      position: relative;
+      width: 100%;
+      p {
+        margin: 0px 0;
+        line-height: 100%;
+      }
+
+      .score {
+        right: 0;
+        top: 0;
+        position: absolute;
+        margin: 0;
+      }
+
+      hr {
+        border: 1px solid #DFDFDF;
+      }
+    }
+  }
+
+
 }

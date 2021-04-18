@@ -113,7 +113,7 @@ const MapComponent = (props) => {
         let airQualityStatus = null;
         const airQuality = insights.airQuality.stations;
         if (airQuality.length > 0) {
-          airQualityStatus = airQuality[0]['AQI'];
+          airQualityStatus = airQuality[0];
         }
 
         props.setAnalysis({
@@ -121,7 +121,8 @@ const MapComponent = (props) => {
           pollen: pollenStatus,
           soilTemp: soilTemp,
           soilMoisture: soilMoisture,
-          waterVapor: '51%'
+          waterVapor: '51%',
+          airQuality: airQualityStatus
         })
       }
     })
