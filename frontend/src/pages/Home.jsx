@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Map from 'components/Map';
 import NavBar from 'components/NavBar';
@@ -14,43 +14,24 @@ import BigCurrentlySelected from 'components/BigCurrentlySelected';
 const HomePage = () => {
   const [sideBarPage, setSideBarPage] = useState('map');
   const [currentPlot, setCurrentPlot] = useState({});
+  const [plots, setPlotOptions] = useState([]);
 
-  // State in case we store these to backend later.
-  const [plots, setPlotOptions] = useState([
-    {
-      type: 'crop',
-      name: 'Strawberry',
-      earthScore: '86',
-      state: 'Summer',
-      image: 'https://i.imgur.com/u0rOCBQ.png',
-      summary: 'Strawberries are low-growing herbaceous plants with a fibrous root system and a crown from which arise basal leaves',
-      environmentalImpact: 'Medium',
-      cost: '$232/sqft',
-      verdict: 'Highly Recommended'
-    },
-    {
-      type: 'crop',
-      name: 'Corn',
-      earthScore: '72',
-      state: 'Fall',
-      image: 'https://i.imgur.com/Fm1Svvq.png',
-      summary: 'Corn is a cereal grain first domesticated by indigenous peoples in southern Mexico about 10,000 years ago',
-      environmentalImpact: 'Medium',
-      cost: '$232/sqft',
-      verdict: 'Highly Recommended'
-    },
-    {
-      type: 'irrigation',
-      name: 'Drip',
-      earthScore: '51',
-      state: 'Medium',
-      image: 'https://i.imgur.com/tdBE8nd.png',
-      summary: 'Drip irrigation is a type of micro-irrigation system that has the potential to save water and nutrients by allowing water to drip slowly to the roots of plants',
-      environmentalImpact: 'Medium',
-      cost: '$232/sqft',
-      verdict: 'Highly Recommended'
-    },
-  ])
+  useEffect(async () => {
+    const response = await fetch('http://fb627db2a1e8.ngrok.io/data/earth', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+    console.log(data);
+    if (!data) throw new Error('Empty response from server');
+    if (data.error) throw new Error(data.error.message);
+
+    setPlotOptions([]);
+  }, [])
 
   return (
     <div>
