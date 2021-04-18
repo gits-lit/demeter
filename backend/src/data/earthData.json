@@ -1,0 +1,124 @@
+[
+    {
+        "type": "crop",
+        "name": "Strawberry",
+        "earthScore": "86",
+        "state": "Summer",
+        "image": "https://i.imgur.com/u0rOCBQ.png",
+        "summary": "Strawberries are low-growing herbaceous plants with a fibrous root system and a crown from which arise basal leaves",
+        "environmentalImpact": "Medium",
+        "cost": "$1600/acre",
+        "verdict": "Highly Recommended"
+    },
+    {
+        "type": "crop",
+        "name": "Corn",
+        "earthScore": "72",
+        "state": "Fall",
+        "image": "https://i.imgur.com/Fm1Svvq.png",
+        "summary": "Corn is a cereal grain first domesticated by indigenous peoples in southern Mexico about 10,000 years ago",
+        "environmentalImpact": "Medium",
+        "cost": "$248/acre",
+        "verdict": "Highly Recommended"
+    },
+    {
+        "type": "crop",
+        "name": "Wheat",
+        "earthScore": "78",
+        "state": "Fall",
+        "image": "https://i.imgur.com/eKB3yQ8.jpeg",
+        "summary": "Wheat is a grass widely cultivated for its seed, a cereal grain which is a worldwide staple food", 
+        "environmentalImpact": "Medium",
+        "cost": "$170/acre",
+        "verdict": "Highly Recommended"
+    },
+    {
+        "type": "crop", 
+        "name": "Rice",
+        "earthScore": "64",
+        "state": "Summer",
+        "image": "https://i.imgur.com/yegWy51.jpeg",
+        "summary": "Rice is the most widely consumed staple food for over half the world's population",
+        "environmentalImpact": "High",
+        "cost": "$225/acre",
+        "verdict": "Recommended"
+    },
+    {
+        "type": "crop",
+        "name": "Onion", 
+        "earthScore": "82", 
+        "state": "Summer",
+        "image": "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/the-health-benefits-of-onions-main-image-700-350-8425535.jpg?quality=90&resize=768,574",
+        "summary": "The onion plant has a fan of hollow, bluish-green leaves and its bulb at the base of the plant begins to swell when a certain day-length is reached",
+        "environmentalImpact": "Medium",
+        "cost": "$500-3000/acre",
+        "verdict": "Highly Recommended"
+    },
+    {
+        "type": "crop", 
+        "name": "Cotton", 
+        "earthScore": "81", 
+        "state": "Fall", 
+        "image": "https://upload.wikimedia.org/wikipedia/commons/6/68/CottonPlant.JPG",
+        "summary": "Cotton is a shrub native to tropical and subtropical regions around the world, including the Americas, Africa, Egypt and India",
+        "environmentalImpact": "High",
+        "cost": "$485/acre", 
+        "verdict": "Recommended"
+    }, 
+    {
+        "type": "irrigation",
+        "name": "Surface",
+        "earthScore": "90",
+        "state": "Medium",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Furrow_irrigated_Sugar.JPG",
+        "summary": "This type of irrigation relies on gravity flow to distribute water. It is the most commonly used irrigation methods and is well suited to mild slopes as well as regular slopes",
+        "environmentalImpact": "Low",
+        "cost": "$23.41/acre",
+        "verdict": "Somewhat Recommended",
+        "likes" : ["rice"]
+    },
+    {
+        "type": "irrigation",
+        "name": "Sprinkler",
+        "earthScore": "70",
+        "state": "Low",
+        "image": "https://marketresearch.biz/wp-content/uploads/2019/04/sprinkler-irrigation-systems-market.jpg",
+        "summary": "Sprinkler Irrigation involves spraying crops with water by use of permanently or temporarily set tools. Water is pumped through pipes and sprinkled to crops like drops of rain from the spray heads.",
+        "environmentalImpact": "Low",
+        "cost": "$73.45/acre",
+        "verdict": "Highly Recommended"
+    },
+    {
+        "type": "irrigation",
+        "name": "Drip",
+        "earthScore": "20",
+        "state": "High",
+        "image": "https://i.imgur.com/tdBE8nd.png",
+        "summary": "Drip irrigation is a type of micro-irrigation system that has the potential to save water and nutrients by allowing water to drip slowly to the roots of plants",
+        "environmentalImpact": "Medium",
+        "cost": "$500/acre",
+        "verdict": "Somewhat Recommended"
+    },
+    {
+        "type": "irrigation",
+        "name": "Subsurface",
+        "earthScore": "51",
+        "state": "High",
+        "image": "https://i.ytimg.com/vi/jW5VhhT2bL0/maxresdefault.jpg",
+        "summary": "Subsurface irrigation waters crops from below the ground. Pipes placed beneath the soil surface supply water to the roots of plants.",
+        "environmentalImpact": "Medium",
+        "cost": "$800/sqft",
+        "verdict": "Somewhat Recommended"
+    },
+    {
+        "type": "irrigation",
+        "name": "Center Pivot",
+        "earthScore": "25",
+        "state": "Medium",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Crops_Kansas_AST_20010624.jpg/800px-Crops_Kansas_AST_20010624.jpg",
+        "summary": "Water is distributed by a system of sprinklers that move on wheeled towers in a circular pattern. This system is common in flat areas of the United States.",
+        "environmentalImpact": "High",
+        "cost": "$41.59/acre",
+        "verdict": "Somewhat Recommended"
+    }
+]

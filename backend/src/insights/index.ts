@@ -14,6 +14,7 @@ import { getWeatherForecast } from './ambee/weatherForecast';
 import { getWeatherHistory } from './ambee/weatherHistory';
 import { getWeatherLatest } from './ambee/weatherLatest';
 import { getPollenLatest } from './ambee/pollenLatest';
+import weatherRouter from './weather'
 import { USE_API } from 'src/configuration';
 import exampleResponse from '../data/perfectResponse.json';
 
@@ -136,4 +137,5 @@ router.get('/', async (req: Request, res: Response) => {
     }
 });
 
+router.use('/weather', weatherRouter)
 export default router;

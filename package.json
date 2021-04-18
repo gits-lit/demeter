@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start" : "concurrently --kill-others \"yarn --cwd ./frontend start\" \"yarn --cwd ./backend dev\"",
+    "start" : "yarn --cwd ./backend start",
+    "dev" : "concurrently --kill-others \"yarn --cwd ./frontend start\" \"yarn --cwd ./backend dev\"",
     "frontend": "yarn --cwd ./frontend start",
-    "backend" : "yarn --cwd ./backend dev"
+    "backend" : "yarn --cwd ./backend dev",
+    "build" : "yarn install --production=false && yarn --cwd ./backend build",
+    "build-frontend": "yarn install && yarn --cwd ./frontend build"
   },
   "author": "trulyronak",
   "license": "ISC",
