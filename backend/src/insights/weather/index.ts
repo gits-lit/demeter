@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { json } from 'body-parser';
 import { Router, Request, Response } from 'express';
 import { validationResult, check } from 'express-validator';
 import { WEATHER_API_KEY } from 'src/configuration';
@@ -61,7 +60,7 @@ const getWeatherForecast = async (from: string, to: string): Promise<WeatherResp
     
     try {
         const response = await axios.request({
-            url: `https://weatherplanner.azure-api.net/v1/Forecast/Des Moines/${fromStr}/${toStr}`,
+            url: `https://weatherplanner.azure-api.net/v1/Forecast/Des Moines/${from}/${to}`,
             params: { 'subscription-key': WEATHER_API_KEY },
             headers: { 'Content-type': 'application/json' }
         });
