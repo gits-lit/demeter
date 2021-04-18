@@ -17,7 +17,7 @@ const HomePage = () => {
   const [plots, setPlotOptions] = useState([]);
 
   useEffect(async () => {
-    const response = await fetch('http://35c83b560c8a.ngrok.io/data/earth', {
+    const response = await fetch('https://demeter-api-iowa.herokuapp.com/data/earth', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
