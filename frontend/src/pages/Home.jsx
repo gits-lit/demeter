@@ -1,8 +1,10 @@
+/* eslint-disable */
 import { useEffect, useState } from 'react';
 
 import Map from 'components/Map';
 import NavBar from 'components/NavBar';
 import SideBar from 'components/SideBar';
+import StatsModal from 'components/StatsModal';
 
 import CurrentlySelected from 'components/CurrentlySelected';
 import Seasons from 'components/Seasons';
@@ -15,6 +17,11 @@ const HomePage = () => {
   const [sideBarPage, setSideBarPage] = useState('map');
   const [currentPlot, setCurrentPlot] = useState({});
   const [plots, setPlotOptions] = useState([]);
+  const [visible, setModal] = useState(true);
+
+  const flipModal = () => {
+    setModal(!visible);
+  };
 
   useEffect(async () => {
     const response = await fetch('http://35c83b560c8a.ngrok.io/data/earth', {
@@ -31,20 +38,20 @@ const HomePage = () => {
     if (data.error) throw new Error(data.error.message);
 
     setPlotOptions(data);
-  }, [])
+  }, []);
 
   return (
     <div>
-      <NavBar />
-      <SideBar setSideBarPage={setSideBarPage}/>
-      <Map sideBarPage={sideBarPage}/>
+      <StatsModal visible={visible} setModal={flipModal} />
+      <SideBar setSideBarPage={setSideBarPage} setModal={flipModal} />
+      <Map sideBarPage={sideBarPage} />
       <Timeline />
-      <CurrentlySelected currentPlot={currentPlot}/>
+      <CurrentlySelected currentPlot={currentPlot} />
       <Seasons />
-      <PlotType plots={plots} setCurrentPlot={setCurrentPlot}/>
-      <BigCurrentlySelected currentPlot={currentPlot}/>
+      <PlotType plots={plots} setCurrentPlot={setCurrentPlot} />
+      <BigCurrentlySelected currentPlot={currentPlot} />
     </div>
-  )
-}
+  );
+};
 
 export default HomePage;

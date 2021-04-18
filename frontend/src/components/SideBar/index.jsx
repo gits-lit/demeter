@@ -22,7 +22,7 @@ const SideBar = (props) => {
           <img src={saved} alt="saved icon"/>
           <p>Create</p>
         </div>
-        <div className="icon" onClick={() => {props.setSideBarPage('statistics')}}>
+        <div className="icon" onClick={props.setModal}>
           <img src={statistics} alt="statistics icon"/>
           <p>Harvest Statistics</p>
         </div>
