@@ -66,27 +66,27 @@ export const data = earthData;
     }
     
     export const monthToSeason = (month: Month) => {
-        if (month < 3) {
-            return Season.Winter;
-        } else if (month < 6) {
+        if (month >= 2 && month < 5 ) {
             return Season.Spring;
-        } else if (month < 9) {
+        } else if (month >= 5 && month < 8) {
             return Season.Summer;
-        } else {
+        } else if (month >= 8 && month < 11) {
             return Season.Fall;
+        } else {
+            return Season.Winter;
         }
     };
     
     export const seasonToMonth = (season: Season) => {
         switch (season) {
             case Season.Spring:
-                return Month.January;
+                return Month.March;
             case Season.Summer:
-                return Month.April;
+                return Month.June;
             case Season.Fall:
-                return Month.August;
+                return Month.September;
             case Season.Winter:
-                return Month.October;
+                return Month.December;
         }
     };
     
@@ -117,8 +117,9 @@ export const data = earthData;
             const endMonth = seasonToMonth(season);
             const numOfMonths = cropData.daysToGrow / 30;
             const startMonth = cleanMonth(endMonth - numOfMonths);
+            console.log(`for ${item.crop}, startMonth: ${startMonth}, endMonth: ${endMonth}`)
     
-            for (let j = 0; j < numOfMonths; j++) {
+            for (let j = 0; j <= numOfMonths; j++) {
                 const month = cleanMonth(startMonth + j);
                 const season = monthToSeason(month);
                 const idx = SeasonToIdx(season);
@@ -149,7 +150,7 @@ export const data = earthData;
             const numOfMonths = cropData.daysToGrow / 30;
             const startMonth = cleanMonth(endMonth - numOfMonths);
     
-            for (let j = 0; j < numOfMonths; j++) {
+            for (let j = 0; j <= numOfMonths; j++) {
                 const month = cleanMonth(startMonth + j);
                 const season = monthToSeason(month);
                 const idx = SeasonToIdx(season);
