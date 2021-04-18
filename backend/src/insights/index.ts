@@ -17,7 +17,8 @@ import { getPollenLatest } from './ambee/pollenLatest';
 import weatherRouter from './weather'
 import { AMBEE_API_KEY, USE_API } from 'src/configuration';
 import exampleResponse from '../data/perfectResponse.json';
-import { getGrade, numToGrade } from '../utils/getGrade';
+import * as EnvironmentGrade from '../utils/getEnvGrade';
+import * as LocationGrade from '../utils/getLocGrade';
 
 const router = Router();
 
@@ -120,8 +121,8 @@ const handler = async (req: Request, res: Response) => {
         const soilData = (USE_API) ? await getSoilLatest(lat, lng) : (exampleResponse.insights as any)["soilLatest"]
         data["soilLatest"] = soilData;
 
-        const magicNumber = getGrade(soilData.data[0].soil_moisture, soilData.data[0].soil_temperature);
-        const {score: environmentGrade, description} = numToGrade(magicNumber);
+        const envgradeScore = EnvironmentGrade.getGrade(soilData.data[0].soil_moisture, soilData.data[0].soil_temperature);
+        const {score: environmentGrade, description: environmentDescription} = EnvironmentGrade.numToGrade(envgradeScore);
 
         for (const endpoint of endpoints) {
             if (["soilLatest"].includes(endpoint.name)) {
@@ -148,7 +149,7 @@ const handler = async (req: Request, res: Response) => {
             lng,
             insights: data,
             environmentGrade,
-            description
+            environmentDescription
         });
     }
 };
