@@ -101,7 +101,7 @@
     },
     {
         "type": "irrigation",
-        "name": "Subsurface Drip Irrigation",
+        "name": "Subsurface",
         "earthScore": "51",
         "state": "High",
         "image": "https://i.ytimg.com/vi/jW5VhhT2bL0/maxresdefault.jpg",
@@ -112,7 +112,7 @@
     },
     {
         "type": "irrigation",
-        "name": "Center Pivot Irrigation",
+        "name": "Center Pivot",
         "earthScore": "25",
         "state": "Medium",
         "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Crops_Kansas_AST_20010624.jpg/800px-Crops_Kansas_AST_20010624.jpg",

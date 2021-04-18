@@ -30,7 +30,7 @@ const HomePage = () => {
     if (!data) throw new Error('Empty response from server');
     if (data.error) throw new Error(data.error.message);
 
-    setPlotOptions([]);
+    setPlotOptions(data);
   }, [])
 
   return (
