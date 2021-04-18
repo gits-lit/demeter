@@ -17,21 +17,14 @@ enum Score {
 
 const scoreToDescription = (score: Score): string => {
     switch(score) {
-        case Score.A, Score["A+"]: return "This place is great overall, the temperature is near perfect, and the moisture is flawless as well!"
-        case Score.B, Score["B+"]: return "This place is not bad, the temperature is pretty good, but the soil moisture isn't the best — watering and fertilizing will be key to get the most out of this space."
-        case Score.C, Score["C+"]: return "This place isn't the best — it's temperature isn't in a great range nor is the soil moisture suitable for industrial farming. You'll need a lot of heaters / fans + fertilizer + water to build on this spot."
-        case Score.D, Score["D+"]: return "We wouldn't recommend farming here. The temperature is not conducive to agricultural growth"
-        case Score.F: return "We cannot give any recommendations for farming here — The temperature is not conducive to agricultural growth and the soil moisture is horrible"
+        case Score.A, Score["A+"]: return "Air quality is satisfactory, and air pollution poses little or no risk."
+        case Score.B, Score["B+"]: return "Air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution."
+        case Score.C, Score["C+"]: return "Members of sensitive groups may experience health effects. The general public is less likely to be affected."
+        case Score.D, Score["D+"]: return "Some members of the general public may experience health effects; members of sensitive groups may experience more serious health effects."
+        case Score.F: return "Health alert: The risk of health effects is increased for everyone."
     }
 }
 
-/*
-A: This place is great overall, the temperature is near perfect, and the moisture is flawless as well!
-B: This place is not bad, the temperature is pretty good, but the soil moisture isn't the best — watering and fertilizing will be key to get the most out of this space.
-C: This place isn't the best — it's temperature isn't in a great range nor is the soil moisture suitable for industrial farming. You'll need a lot of heaters / fans + fertilizer + water to build on this spot.
-D: We wouldn't recommend farming here. The temperature is not conducive to agricultural growth
-F: We cannot give any recommendations for farming here — The temperature is not conducive to agricultural growth and the soil moisture is horrible
-*/
 export const numToGrade = (score: number): Grade => {
     score = Math.round(score);
     return {
@@ -40,9 +33,14 @@ export const numToGrade = (score: number): Grade => {
     }
 }
 
-export const getGrade = (moisture: number,temp: number): number  => {
-    const weights = [0.1,0.9];
-    const moistureScore = 1 - Math.abs(40 - moisture)/40;
-    const tempScore = 1 - Math.abs(70 - temp)/70;
-    return (moistureScore*weights[0] + tempScore*weights[1]) * 9;
+export const getGrade = (aqi: number): Score => {
+    if (aqi < 37.5) return Score["A+"];
+    else if (aqi < 75) return Score["A"];
+    else if (aqi < 112.5) return Score["B+"];
+    else if (aqi < 150) return Score["B"];
+    else if (aqi < 187.5) return Score["C+"];
+    else if (aqi < 225) return Score["C"];
+    else if (aqi < 262.5) return Score["D+"];
+    else if (aqi < 300) return Score["D"];
+    else  return Score["F"];
 }
