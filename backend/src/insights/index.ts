@@ -20,7 +20,7 @@ import exampleResponse from '../data/perfectResponse.json';
 
 const router = Router();
 
-router.get('/', async (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response) => {
     if (!USE_API) {
         return res.json(exampleResponse);
     }
