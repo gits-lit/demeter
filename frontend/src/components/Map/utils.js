@@ -10,7 +10,7 @@ const height=400;
  * Creates a plot at a location
 **/
 
-export const loadLocation = (map, lng, lat, id, width, length, color) => {
+export const loadLocation = (map, lng, lat, id, width, length, color, minLat, maxLat, minLng, maxLng, currentPlot, callback) => {
   console.log(width);
   console.log(length);
 
@@ -98,6 +98,17 @@ export const loadLocation = (map, lng, lat, id, width, length, color) => {
     canvas: map.getCanvas(),
     context: gl,
     antialias: true
+    });
+
+    callback(id, {
+      model: cube,
+      minLat: minLat,
+      maxLat: maxLat,
+      minLng: minLng,
+      maxLng: maxLng,
+      centerLat: lng,
+      centerLng: lat,
+      currentPlot: currentPlot
     });
 
     this.renderer.autoClear = false;

@@ -33,6 +33,9 @@ const Map = ReactMapboxGl({
 });
 
 let ourDraw = null;
+let newCurrentPlot = null;
+// CENTER LAT AND CENTER LNG are actual lat long btw
+let objects = {};
 const MapComponent = (props) => {
   const height = (props.sideBarPage !== 'map') ? '70vh' : '95vh';
   const bottom = (props.sideBarPage !== 'map') ? '11vh' : '0vh';
@@ -46,11 +49,41 @@ const MapComponent = (props) => {
     window.map = map;
   };
 
-  const onMapClick = (map) => {
-    window.map = map;
+  const setObjects = (id, newObjects) => {
+    objects[id] = newObjects;
+  }
+
+  const onMapClick = (map, e) => {
+    Object.values(objects).forEach((value) => {
+      console.log(value);
+      if (e.lngLat.lng < value.maxLat && e.lngLat.lat < value.maxLng && e.lngLat.lat > value.minLng && e.lngLat.lng > value.minLat) {
+        console.log('clicking');
+        const newNewCurrentPlot = {...value.currentPlot};
+        newNewCurrentPlot.sqFt = Math.floor(measure(value.maxLat, value.maxLng, value.minLat, value.minLng) / 3.2808);
+        props.setCurrentPlot(
+          newNewCurrentPlot
+        );
+      }
+    })
+  }
+
+  const onMouseMove = (map, e) => {
+    let cursor = 'default';
+    Object.values(objects).forEach((value) => {
+      if (e.lngLat.lng < value.maxLat && e.lngLat.lat < value.maxLng && e.lngLat.lat > value.minLng && e.lngLat.lng > value.minLat) {
+        value.model.scale.x = 1.02;
+        value.model.scale.z = 1.02;
+        cursor = 'pointer';
+      } else {
+        value.model.scale.x = 1;
+        value.model.scale.z = 1;
+      }
+    })
+    document.body.style.cursor = cursor;
   }
 
   useEffect(() => {
+    newCurrentPlot = props.currentPlot;
     if (props.currentPlot && props.currentPlot.type === 'crop') { 
       if (props.currentPlot.state === 'Spring' || props.currentPlot.state === 'Summer') {
         color = 'rgba(39, 174, 96, 1)';
@@ -60,7 +93,7 @@ const MapComponent = (props) => {
     } else {
       color = 'rgba(64, 145, 220, 1)';
     }
-  }, [props.currentPlot])
+  }, [props.currentPlot]);
 
   const onDrawCreate = ({ features }) => {
     console.log(features);
@@ -82,21 +115,27 @@ const MapComponent = (props) => {
       let centerLng = (maxLng + minLng) / 2;
       if (features[0].geometry.coordinates[0][0][0] < 0) {
         centerLat = -centerLat;
+        const newMinLat = -maxLat;
+        maxLat = -minLat;
+        minLat = newMinLat;
       }
       if (features[0].geometry.coordinates[0][0][1] < 0) {
         centerLng = -centerLng;
+        const newMinLng = -maxLng;
+        maxLng = -minLng;
+        minLng = newMinLng;
       }
       
-      if (window.map) {
+      if (window.map && newCurrentPlot) {
         console.log(features[0].id)
-        loadLocation(window.map, centerLat, centerLng, features[0].id, width, length, color)
+        loadLocation(window.map, centerLat, centerLng, features[0].id, width, length, color, minLat, maxLat, minLng, maxLng, newCurrentPlot, setObjects)
       }
 
       if (ourDraw && features[0].id) {
         const currentId = features[0].id;
         setTimeout(() => {
           ourDraw.draw.delete(currentId)
-        }, 3000);
+        }, 1000);
       }
     }
   };
@@ -134,6 +173,7 @@ const MapComponent = (props) => {
       }}
       onClick={onMapClick}
       onStyleLoad={onMapLoad}
+      onMouseMove={onMouseMove}
       pitch = {[50]}
       // eslint-disable-next-line
       style="mapbox://styles/mapbox/satellite-v9"
