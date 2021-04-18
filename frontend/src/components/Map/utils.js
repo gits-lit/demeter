@@ -1,4 +1,3 @@
-import {Threebox} from 'threebox-plugin';
 import { MercatorCoordinate } from 'mapbox-gl';
 import * as THREE from 'three';
 import { TweenMax } from 'gsap';
