@@ -20,10 +20,11 @@ const HomePage = () => {
   const [sideBarPage, setSideBarPage] = useState('map');
   const [currentPlot, setCurrentPlot] = useState({});
   const [plots, setPlotOptions] = useState([]);
-  const [visible, setModal] = useState(true);
+  const [visible, setModal] = useState(false);
 
   const newSetSideBarPage = (sideBarPageParam) => {
     console.log(sideBarPageParam);
+    console.log('hi')
     if (sideBarPageParam !== 'map') {
       if (seasonsAnimation) {
         seasonsAnimation.seek(0);
@@ -135,7 +136,7 @@ const HomePage = () => {
     });
 
     cardAnimation = anime({
-      targets: '.fade-up',
+      targets: '.analysis .fade-up',
       translateY: -10,
       opacity: 100,
       duration: 1000,

@@ -33,7 +33,7 @@ const BigCurrentlySelected = (props) => {
         }}
       >
         <h1>Current Selection</h1>
-        <h2>{props.currentPlot.name || 'N/A'}</h2>
+        <h2 style={{marginBottom: '4vh'}}>{props.currentPlot.name || 'N/A'}</h2>
         <div className="section summary">
           <h3>What is it</h3>
           <p>{props.currentPlot.summary || 'N/A'}</p>
