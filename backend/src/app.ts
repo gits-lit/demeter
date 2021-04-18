@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import insightRouter from './insights';
+import weatherRouter from './weather';
 
 export const getApp = () => {
     const app = express();
@@ -8,6 +9,7 @@ export const getApp = () => {
     app.use(bodyParser.json());
 
     app.use('/insight', insightRouter);
+    app.use('/weather', weatherRouter);
 
     return app;
 };
