@@ -6,7 +6,9 @@ import { weatherDateParse } from 'src/utils/parseDate';
 import weatherResponse from "src/data/weatherResponse.json"
 
 const router = Router();
-router.post('/', async (req: Request, res: Response) => {
+
+const handler = async (req: Request, res: Response) => {
+
     await check('from')
         .isString()
         .run(req);
@@ -41,7 +43,10 @@ router.post('/', async (req: Request, res: Response) => {
             return res.json(weatherResponse)
         }
     }
-});
+};
+
+router.post('/', handler)
+router.get('/', handler)
 
 interface WeatherForecast {
     date: string;

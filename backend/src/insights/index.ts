@@ -20,7 +20,7 @@ import exampleResponse from '../data/perfectResponse.json';
 
 const router = Router();
 
-router.post('/', async (req: Request, res: Response) => {
+const handler = async (req: Request, res: Response) => {
     if (!USE_API) {
         return res.json(exampleResponse);
     }
@@ -147,7 +147,10 @@ router.post('/', async (req: Request, res: Response) => {
             insights: data
         });
     }
-});
+};
+
+router.get('/', handler);
+router.post('/', handler);
 
 router.use('/weather', weatherRouter)
 export default router;
