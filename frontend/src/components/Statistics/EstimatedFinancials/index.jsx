@@ -11,32 +11,52 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
+import * as Analysis from "analysis"
+
 import './style.scss';
 
-const data = [
-  {
-    name: 'Spring 2021',
-    spending: -4000,
-    revenue: 2400,
-  },
-  {
-    name: 'Summer 2021',
-    spending: -5000,
-    revenue: 2400,
-  },
-  {
-    name: 'Fall 2021',
-    spending: -4000,
-    revenue: 2400,
-  },
-  {
-    name: 'Winter 2021',
-    spending: -4000,
-    revenue: 2400,
-  },
-];
-
 const EstimatedFinancials = (props) => {
+  const exampleInput = [
+    {
+      crop: "Corn",
+      acre: 120
+    },
+    {
+      crop: "Strawberry",
+      acre: 30
+    },
+    {
+      crop: "Rice",
+      acre: 60
+    },
+    {
+      crop: "Wheat",
+      acre: 54
+    },
+  ];
+  let result = Analysis.determineSpendingAndRevenue(exampleInput)
+  console.log(result)
+  
+  const data = [
+    {
+      name: 'Spring 2021',
+    },
+    {
+      name: 'Summer 2021',
+    },
+    {
+      name: 'Fall 2021',
+    },
+    {
+      name: 'Winter 2021',
+    },
+  ];
+
+  for (let j = 0; j < data.length; j++) {
+      data[j].spending = result.spending[j]
+      data[j].revenue = result.revenue[j]
+  }
+
   return (
     <div className="EstimatedFinancials">
       <h3 className="stat-title">Estimated Financials</h3>
