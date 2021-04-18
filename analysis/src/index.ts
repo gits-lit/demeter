@@ -17,6 +17,8 @@ export const data = earthData;
         lbsPerAcre: number;
         valuePerAcre: number;
     }
+
+ 
     
     export const dataForCrop = (crop: string): CropInformation => {
         return earthData.find(candidate => {
@@ -24,6 +26,11 @@ export const data = earthData;
         }) as CropInformation;
     };
     
+    export const findAlternateCrop = (crop: CropInformation): CropInformation => {
+        return earthData.find(candidate => {
+            return candidate.name !== crop.name && candidate.state === crop.state
+        }) as CropInformation;
+    };
     /**
     Array
        0    1      2    3

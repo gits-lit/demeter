@@ -1,30 +1,57 @@
-import { Button } from 'antd';
-import Plot from '../../Plot';
-
-import redo from '../../../assets/redo.svg';
-import './style.scss';
+import { Button } from "antd";
+import Plot from "../../Plot";
+import insights from "./earthData.json";
+import * as Analysis from "analysis";
+import redo from "../../../assets/redo.svg";
+import "./style.scss";
+import { useState } from "react";
 
 const CropRotation = (props) => {
+  const exampleInput = [
+    {
+      crop: "Corn",
+      acre: 120,
+    },
+    {
+      crop: "Strawberry",
+      acre: 30,
+    },
+    {
+      crop: "Rice",
+      acre: 60,
+    },
+    {
+      crop: "Wheat",
+      acre: 54,
+    },
+  ];
 
-    const exampleInput = [
-        {
-          crop: "Corn",
-          acre: 120
-        },
-        {
-          crop: "Strawberry",
-          acre: 30
-        },
-        {
-          crop: "Rice",
-          acre: 60
-        },
-        {
-          crop: "Wheat",
-          acre: 54
-        },
-      ];
+  const data = exampleInput.map((currentCrop) => {
+    const cropData = Analysis.dataForCrop(currentCrop.crop);
+    const newCrop = Analysis.findAlternateCrop(cropData);
+    return {
+      currentCrop: cropData,
+      newCrop
+    };
+  });
 
+  const [currentIdx, setIdx] = useState(0)
+  const currentData = data[currentIdx];
+
+  const nextPage = () => {
+      if (currentIdx === data.length - 1) {
+          setIdx(0)
+      } else {
+          setIdx(currentIdx + 1)
+      }
+  }
+  const prevPage = () => {
+      if (currentIdx === 0) {
+          setIdx(data.length - 1)
+      } else {
+          setIdx(currentIdx - 1)
+      }
+  }
 
   return (
     <div className="CropRotation">
@@ -34,25 +61,22 @@ const CropRotation = (props) => {
         <p>Recommended Rotations</p>
       </strong>
       <div className="resize">
-        <Plot type={'crop'} state={'Meow'} />
+        <Plot type={"crop"} state={currentData.currentCrop.state} name={currentData.currentCrop.name} earthScore={currentData.currentCrop.earthScore} />
       </div>
-      <h3 style={{ textAlign: 'center' }}>
-        <span style={{ marginRight: '8px' }}>
+      <h3 style={{ textAlign: "center" }}>
+        <span style={{ marginRight: "8px" }}>
           <img src={redo} alt="redo" />
         </span>
         Rotates To
       </h3>
       <div className="resize">
-        <Plot type={'crop'} state={'Meow'} />
+      <Plot type={"crop"} state={currentData.newCrop.state} name={currentData.newCrop.name} earthScore={currentData.newCrop.earthScore} />
       </div>
-      <p>
-        This rotation can help save 20 metric tonnes of C02 and increase profits
-        by 200%.
-      </p>
+     
       <div className="buttons">
-        <Button className="backward">Back</Button>
+        <Button className="backward" onClick={prevPage}>Back</Button>
 
-        <Button className="forward">Next</Button>
+        <Button className="forward" onClick={nextPage}>Next</Button>
       </div>
     </div>
   );
