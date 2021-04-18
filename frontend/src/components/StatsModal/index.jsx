@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import Draggable from 'react-draggable';
 
+import CropRotation from '../Statistics/CropRotation';
+import EstimatedFinancials from '../Statistics/EstimatedFinancials';
+import EnvironmentalStrain from '../Statistics/EnvironmentalStrain';
+import FarmBreakdown from '../Statistics/FarmBreakdown';
+
 import title from '../../assets/harveststats.svg';
 import './style.scss';
 
@@ -28,6 +33,8 @@ const StatsModal = (props) => {
   return (
     <div className="StatsModal">
       <Modal
+        className="Modal"
+        style={{ top: 30 }}
         visible={props.visible}
         onCancel={props.setModal}
         onOk={props.setModal}
@@ -43,7 +50,17 @@ const StatsModal = (props) => {
         )}
       >
         <img className="title" src={title} alt="title" />
+        <div className="tstats-container">
+          <h1>Placeholder</h1>
+          <h1>Placeholder</h1>
 
+          <FarmBreakdown />
+        </div>
+        <div className="bstats-container">
+          <CropRotation />
+          <EstimatedFinancials />
+          <EnvironmentalStrain />
+        </div>
       </Modal>
     </div>
   );

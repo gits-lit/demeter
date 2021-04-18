@@ -15,6 +15,7 @@
     "react-mapbox-gl": "^5.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "recharts": "^2.0.9",
     "sass": "^1.32.10",
     "web-vitals": "^1.0.1"
   },

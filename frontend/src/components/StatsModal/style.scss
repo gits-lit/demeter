@@ -8,3 +8,29 @@
     -ms-user-select: none;
   }
 }
+.stat-title {
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.sub-title {
+  line-height: 6px;
+  font-size: 12px;
+}
+
+.ant-modal {
+  width: 75vw !important;
+}
+
+.bstats-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.tstats-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
