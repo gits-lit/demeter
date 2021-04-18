@@ -1,12 +1,13 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+import cors from 'cors';
 import insightRouter from './insights';
 import earthData from "./data/earthData.json"
 
 export const getApp = () => {
     const app = express();
-    app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(bodyParser.json());
+    app.use(cors())
+    app.use(express.urlencoded({ extended: false }));
+    app.use(express.json());
 
     app.use('/insight', insightRouter);
     app.get('/data/earth', (req, res) => {
