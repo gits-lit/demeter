@@ -20,7 +20,7 @@ const BigCurrentlySelected = (props) => {
 
   return (
     <div
-      className="big-currently-selected"
+      className="big-currently-selected right-into"
       style={{
         backgroundImage: `linear-gradient(to top, ${color} 70%, rgba(178, 178, 178, 0)), url(${props.currentPlot.image || 'https://i.imgur.com/qqWYtUu.png'})`,
         boxShadow: `0px 0px 15px ${color}`

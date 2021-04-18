@@ -23,7 +23,7 @@ const PlotType = (props) => {
   }
 
   return (
-    <div className="plot-type">
+    <div className="plot-type right-into">
       <div className="heading">
         <img src={sprout} alt="sprout icon"/>
         <div className="text">

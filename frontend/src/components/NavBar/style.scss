@@ -1,12 +1,14 @@
 .nav-bar { 
   align-items: center;
+  background-color: white;
   border-bottom: 1px solid #DFDFDF;
   box-sizing: border-box;
   display: flex;
   height: 8vh;
   padding-left: 5vw;
   width: 100vw;
-  z-index: 999;
+  z-index: 999 !important;
+  position: relative;
 
   .logo {
     align-items: center;

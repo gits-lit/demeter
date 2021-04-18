@@ -2,7 +2,7 @@ import './style.scss';
 
 const Card = (props) => {
   return (
-    <div className="card">
+    <div className="card fade-up">
       <h3>{props.title}</h3>
       {props.children}
     </div>

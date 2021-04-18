@@ -2,7 +2,7 @@ import './style.scss';
 
 const Breakdowns = (props) => {
   return (
-    <div class="Breakdowns">
+    <div className="Breakdowns fade-up">
       <h3>{props.title}</h3>
       <p className="subtitle">
         Grade calculated by realtime data on your location.

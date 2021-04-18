@@ -5,7 +5,7 @@
   bottom: 1vh;
   height: 44vh;
   position: absolute;
-  right: 1vw;
+  right: calc(1vw - 1200px);
   width: 18vw;
 
   .information {

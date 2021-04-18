@@ -8,9 +8,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import * as Analysis from "analysis"
+import * as Analysis from "analysis";
 import './style.scss';
-
 
 const EnvironmentalStrain = (props) => {
   const exampleInput = [

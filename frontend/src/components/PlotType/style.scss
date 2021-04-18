@@ -2,7 +2,7 @@
   position: absolute;
   bottom: 0;
   height: 44vh;
-  left: 52vw;
+  left: calc(52vw + 1200px);
   width: 28vw;
 
   .filter {
@@ -80,6 +80,10 @@
     scrollbar-width: none;
     width: 100%;
     -ms-overflow-style: none;
+
+    .plot {
+      opacity: 0;
+    }
 
     &::-webkit-scrollbar {
       display: none;
