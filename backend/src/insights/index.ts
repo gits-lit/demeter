@@ -17,6 +17,7 @@ import { getPollenLatest } from './ambee/pollenLatest';
 import weatherRouter from './weather'
 import { USE_API } from 'src/configuration';
 import exampleResponse from '../data/perfectResponse.json';
+import { getGrade, numToGrade } from '../utils/getGrade';
 
 const router = Router();
 
@@ -115,16 +116,19 @@ const handler = async (req: Request, res: Response) => {
         let data: any = {};
         
         const specific = await getAirQuality(lat, lng);
-        data["getAirQuality"] = specific;
-        specific.stations[0].CO;
+        data["airQuality"] = specific;
 
-        
         // kyle do magic here
-
+        const weights = [0.1,0.9];
+        const soilData = await getSoilLatest(lat, lng);
+        data["soilLatest"] = soilData;
+        const magicNumber = getGrade(soilData.data[0].soil_moisture, soilData.data[0].soil_temperature);
+        const grade = numToGrade(magicNumber);
 
         for (const endpoint of endpoints) {
-            if (["getAirQuality"].includes(endpoint.name)) {
+            if (["airQuality", "soilLatest"].includes(endpoint.name)) {
                 // skip these since we already did the analysis
+                continue;
             } else if (req.body[endpoint.name] == 'API') {
                 console.log(`requesting ${endpoint.name} using the api`)
                 const result = await endpoint.api(lat, lng, from, to)
@@ -144,7 +148,8 @@ const handler = async (req: Request, res: Response) => {
         return res.json({
             lat,
             lng,
-            insights: data
+            insights: data,
+            areaGrade: grade
         });
     }
 };

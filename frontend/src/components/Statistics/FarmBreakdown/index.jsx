@@ -3,13 +3,6 @@ import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 
 import './style.scss';
 
-const data = [
-  { name: 'Corn', value: 400 },
-  { name: 'Strawberry', value: 300 },
-  { name: 'Rice', value: 300 },
-  { name: 'Mango', value: 200 },
-];
-
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
@@ -34,6 +27,8 @@ const renderActiveShape = (props) => {
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
   const textAnchor = cos >= 0 ? 'start' : 'end';
+
+  
 
   return (
     <g>
@@ -69,7 +64,7 @@ const renderActiveShape = (props) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
-      >{`${value} tons`}</text>
+      >{`${value} acres`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
@@ -84,6 +79,29 @@ const renderActiveShape = (props) => {
 };
 
 const FarmBreakdown = (props) => {
+    const exampleInput = [
+        {
+          crop: "Corn",
+          acre: 120
+        },
+        {
+          crop: "Strawberry",
+          acre: 30
+        },
+        {
+          crop: "Rice",
+          acre: 60
+        },
+        {
+          crop: "Wheat",
+          acre: 54
+        },
+      ];
+    
+      const data = exampleInput.map(input => ({
+          name: input.crop,
+          value: input.acre
+      }));
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = useCallback(
     (_, index) => {
