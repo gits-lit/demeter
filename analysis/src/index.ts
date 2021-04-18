@@ -1,6 +1,4 @@
 import earthData from './data/earthData.json';
-import moment from 'moment';
-
 interface CropInformation {
     type: string;
     name: string;
