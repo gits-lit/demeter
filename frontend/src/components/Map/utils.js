@@ -9,7 +9,7 @@ const height=400;
  * Creates a plot at a location
 **/
 
-export const loadLocation = (map, lng, lat, id, width, length, color, minLat, maxLat, minLng, maxLng, currentPlot, callback) => {
+export const loadLocation = (map, lng, lat, id, width, length, color, minLat, maxLat, minLng, maxLng, currentPlot, day, callback) => {
   console.log(width);
   console.log(length);
 
@@ -85,7 +85,11 @@ export const loadLocation = (map, lng, lat, id, width, length, color, minLat, ma
     const ftHeight = (height / 3.28084) / 100;
 
     const geometry = new THREE.BoxGeometry( width + 2, ftHeight, length + 2 );
-    const material = new THREE.MeshLambertMaterial( {color: color} );
+    const material = new THREE.MeshPhongMaterial({
+      color,
+      opacity: 0.75,
+      transparent: true,
+    });
     const cube = new THREE.Mesh( geometry, material );
     this.scene.add( cube );
     TweenMax.to(cube.scale, .5, { x: 1, y: 100, z: 1 });
@@ -109,7 +113,8 @@ export const loadLocation = (map, lng, lat, id, width, length, color, minLat, ma
       centerLng: lat,
       currentPlot: currentPlot,
       width: width,
-      length: length
+      length: length,
+      day: day
     });
 
     this.renderer.autoClear = false;

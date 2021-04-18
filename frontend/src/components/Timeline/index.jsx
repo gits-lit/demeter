@@ -4,22 +4,34 @@ import './style.scss';
 import timer from 'assets/timer.svg';
 
 const marks = {
-  0: {
+  336: {
     label: <p className="label">Spring</p>,
   },
-  33: {
+  63: {
     label: <p className="label">Summer</p>,
   },
-  66: {
+  157: {
     label: <p className="label">Fall</p>,
   },
-  100: {
+  247: {
     label: <p className="label">Winter</p>,
   },
 };
 
+const Timeline = (props) => {
+  const onChange = (value) => {
+    props.setDay((108 + value));
+    Object.values(props.objects).forEach((object) => {
+      console.log(props.objects);
+      console.log('testtt');
+      console.log(object.day);
+      const dayDiff = props.day - object.day;
+      console.log(dayDiff);
+      object.model.scale.y = Math.max((dayDiff * 10) + 100, -1);
+      object.model.position.y = Math.max((((400 / 3.28084) / 100) * ((dayDiff * 5) + 50)), -1);
+    });
+  }
 
-const Timeline = () => {
   return (
     <div className="timeline">
       <div className="info">
@@ -30,7 +42,7 @@ const Timeline = () => {
         </div>
       </div>
       <div className="slider">
-       <Slider defaultValue={0} marks={marks} tooltipVisible={false} />
+       <Slider onChange={onChange} defaultValue={0} marks={marks} tooltipVisible={false} max={365}/>
       </div>
     </div>
   )

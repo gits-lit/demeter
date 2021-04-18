@@ -15,6 +15,8 @@ import Analysis from 'components/Analysis';
 import PlotType from 'components/PlotType';
 import BigCurrentlySelected from 'components/BigCurrentlySelected';
 
+import Date from 'components/Date';
+
 import * as AnalysisLib from "analysis";
 
 let seasonsAnimation, timelineAnimation, currentlySelectedAnimation, analysisAnimation, cardAnimation, cards2Animation;
@@ -25,6 +27,7 @@ const HomePage = () => {
   const [visible, setModal] = useState(false);
   const [statsData, setStatsData] = useState([]);
   const [objects, setNewObjects] = useState({});
+  const [day, setDay] = useState(108);
 
   const newSetSideBarPage = (sideBarPageParam) => {
     console.log(sideBarPageParam);
@@ -213,6 +216,7 @@ const HomePage = () => {
       <NavBar />
       <SideBar setSideBarPage={newSetSideBarPage} setModal={flipModal} />
       <Map
+        day={day}
         setCurrentPlot={setCurrentPlot}
         currentPlot={currentPlot}
         draw={draw}
@@ -221,12 +225,13 @@ const HomePage = () => {
         setAnalysis={setAnalysis}
         setNewObjects={setNewObjects}
       />
-      <Timeline />
+      <Timeline setDay={setDay} objects={objects} day={day}/>
       <CurrentlySelected currentPlot={currentPlot} />
       <Seasons />
       <PlotType draw={draw} plots={plots} setCurrentPlot={setCurrentPlot}/>
       <BigCurrentlySelected currentPlot={currentPlot}/>
       <Analysis analysis={analysis}/>
+      <Date day={day}/>
     </div>
   );
 };

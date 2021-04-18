@@ -23,6 +23,7 @@ function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement fun
   return d * 1000; // meters
 }
 
+let day = 108;
 const Map = ReactMapboxGl({
   accessToken:
     'pk.eyJ1IjoiZW1pbmd1eWVuIiwiYSI6ImNrOGI2ZjRyODA1aHEzZG93cmFxaHR5d2IifQ.x8v_uFbdBanYgRtoKCGIOw',
@@ -44,6 +45,10 @@ const MapComponent = (props) => {
   const left = (props.sideBarPage !== 'map') ? '6vw' : '5vw';
   const width = (props.sideBarPage !== 'map') ? '45vw' : '100vw';
   const right = (props.sideBarPage !== 'map') ? '-25vw' : '0vw';
+
+  useEffect(() => {
+    day = props.day;
+  }, [props.day])
 
   const onMapLoad = (map) => {
     window.map = map;
@@ -189,8 +194,8 @@ const MapComponent = (props) => {
       }
       
       if (window.map && newCurrentPlot) {
-        console.log(features[0].id)
-        loadLocation(window.map, centerLat, centerLng, features[0].id, width, length, color, minLat, maxLat, minLng, maxLng, newCurrentPlot, setObjects)
+        console.log(features[0].id);
+        loadLocation(window.map, centerLat, centerLng, features[0].id, width, length, color, minLat, maxLat, minLng, maxLng, newCurrentPlot, day, setObjects)
       }
 
       if (ourDraw && features[0].id) {
