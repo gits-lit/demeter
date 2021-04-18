@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { TweenMax } from 'gsap';
 
 let allLayers = [];
-const height=400;
+const height=100;
 
 /**
  * Creates a plot at a location
@@ -84,7 +84,7 @@ export const loadLocation = (map, lng, lat, id, width, length, color, minLat, ma
 
     const ftHeight = (height / 3.28084) / 100;
 
-    const geometry = new THREE.BoxGeometry( width + 2, ftHeight, length + 2 );
+    const geometry = new THREE.BoxGeometry( width , ftHeight, length );
     const material = new THREE.MeshPhongMaterial({
       color,
       opacity: 0.75,

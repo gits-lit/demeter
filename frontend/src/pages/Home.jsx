@@ -227,7 +227,7 @@ const HomePage = () => {
       />
       <Timeline setDay={setDay} objects={objects} day={day}/>
       <CurrentlySelected currentPlot={currentPlot} />
-      <Seasons />
+      <Seasons day={day}/>
       <PlotType draw={draw} plots={plots} setCurrentPlot={setCurrentPlot}/>
       <BigCurrentlySelected currentPlot={currentPlot}/>
       <Analysis analysis={analysis}/>

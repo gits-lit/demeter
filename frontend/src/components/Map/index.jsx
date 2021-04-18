@@ -46,6 +46,8 @@ const MapComponent = (props) => {
   const width = (props.sideBarPage !== 'map') ? '45vw' : '100vw';
   const right = (props.sideBarPage !== 'map') ? '-25vw' : '0vw';
 
+  const [center, setCenter] = useState([-92.0717042, 42.0434796]);
+
   useEffect(() => {
     day = props.day;
   }, [props.day])
@@ -234,7 +236,7 @@ const MapComponent = (props) => {
         transition: '1s',
         width: '100vw',
       }}
-      center={[-92.0717042, 42.0434796]}
+      center={center}
       flyToOptions={{
         speed: 0
       }}

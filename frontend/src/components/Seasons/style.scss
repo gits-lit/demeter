@@ -8,6 +8,7 @@
   top: calc(9vh - 200px);
   width: 45vw;
   z-index: 800;
+  white-space: nowrap;
 
   h1 {
     color: white;
@@ -24,7 +25,8 @@
   }
 
   .season {
-    margin-left: 20px;
+    padding: 0 20px;
+    width: 28%;
     h1 {
       font-size: 24px;
     }
@@ -34,7 +36,8 @@
   }
 
   .temperature {
-    margin-left: 20px;
+    width: 20%;
+    padding: 0 10px;
     h1 {
       font-size: 16px;
       margin-top: 5px;
@@ -48,13 +51,15 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    margin-left: 20px;
+    position: relative;
+    width: 50%;
 
     .weather-entry {
       align-items: center;
       display: flex;
       justify-content: center;
-      margin-left: 10px;
+      padding: 0 5px;
+      width: 20%;
 
       img {
         display: inline-block;

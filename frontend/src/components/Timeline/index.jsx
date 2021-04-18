@@ -27,8 +27,8 @@ const Timeline = (props) => {
       console.log(object.day);
       const dayDiff = props.day - object.day;
       console.log(dayDiff);
-      object.model.scale.y = Math.max((dayDiff * 10) + 100, -1);
-      object.model.position.y = Math.max((((400 / 3.28084) / 100) * ((dayDiff * 5) + 50)), -1);
+      object.model.scale.y = Math.max((dayDiff * 2) + 100, -1);
+      object.model.position.y = Math.max((((100 / 3.28084) / 100) * ((dayDiff * 1) + 50)), -1);
     });
   }
 
