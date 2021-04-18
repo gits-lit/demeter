@@ -53,16 +53,76 @@ const MapComponent = (props) => {
     objects[id] = newObjects;
   }
 
-  const onMapClick = (map, e) => {
-    Object.values(objects).forEach((value) => {
+  const onMapClick = async (map, e) => {
+    Object.values(objects).forEach(async(value) => {
       console.log(value);
       if (e.lngLat.lng < value.maxLat && e.lngLat.lat < value.maxLng && e.lngLat.lat > value.minLng && e.lngLat.lng > value.minLat) {
-        console.log('clicking');
         const newNewCurrentPlot = {...value.currentPlot};
         newNewCurrentPlot.sqFt = Math.floor(measure(value.maxLat, value.maxLng, value.minLat, value.minLng) / 3.2808);
         props.setCurrentPlot(
           newNewCurrentPlot
         );
+
+        const response = await fetch('https://demeter-api-iowa.herokuapp.com/insight/', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            lng: value.centerLng,
+            lat: value.centerLat,
+            from: new Date().toISOString(),
+            to: new Date().toISOString(),
+          }),
+        });
+
+        const data = await response.json();
+        console.log(data);
+        if (!data) throw new Error('Empty response from server');
+        if (data.error) throw new Error(data.error.message);
+
+        const insights = data.insights;
+
+        let soilTemp = null;
+        let soilMoisture = null;
+        const soil = insights.soilLatest.data;
+        if (soil.length > 0) {
+          soilTemp = Math.floor(soil[0]['soil_temperature'] * 1.8000 + 32.00);
+          soilMoisture = soil[0]['soil_moisture'];
+        }
+
+        const fire = insights.fireLatest.data;
+        let fireStatus = null;
+        if (fire.length > 0) {
+          if (fire[0].confidence === 'low') {
+            fireStatus = 'Low';
+          } else if (fire[0].confidence === 'nominal') {
+            fireStatus = 'Medium';
+          } else {
+            fireStatus = 'High';
+          }
+        }
+
+        let pollenStatus = null;
+        const pollen = insights.pollenForecast.data;
+        if (pollen.length > 0) {
+          pollenStatus = pollen[0]['Risk']['grass_pollen'];
+        }
+
+        let airQualityStatus = null;
+        const airQuality = insights.airQuality.stations;
+        if (airQuality.length > 0) {
+          airQualityStatus = airQuality[0]['AQI'];
+        }
+
+        props.setAnalysis({
+          fire: fireStatus,
+          pollen: pollenStatus,
+          soilTemp: soilTemp,
+          soilMoisture: soilMoisture,
+          waterVapor: '51%'
+        })
       }
     })
   }

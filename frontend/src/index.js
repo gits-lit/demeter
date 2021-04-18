@@ -9,7 +9,6 @@ import {
 import './style.scss';
 import Home from 'pages/Home';
 import Landing from 'pages/Landing';
-import Analysis from 'pages/Analysis';
 
 ReactDOM.render(
   <Router>
@@ -17,13 +16,9 @@ ReactDOM.render(
       <Route path="/home">
         <Home />
       </Route>
-      <Route path="/analysis">
-          <Analysis/>
-      </Route>
       <Route path="/">
         <Landing />
       </Route>
-      
     </Switch>
   </Router>,
   document.getElementById('root')
