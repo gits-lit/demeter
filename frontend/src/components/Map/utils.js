@@ -107,7 +107,9 @@ export const loadLocation = (map, lng, lat, id, width, length, color, minLat, ma
       maxLng: maxLng,
       centerLat: lng,
       centerLng: lat,
-      currentPlot: currentPlot
+      currentPlot: currentPlot,
+      width: width,
+      length: length
     });
 
     this.renderer.autoClear = false;

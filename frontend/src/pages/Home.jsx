@@ -15,12 +15,16 @@ import Analysis from 'components/Analysis';
 import PlotType from 'components/PlotType';
 import BigCurrentlySelected from 'components/BigCurrentlySelected';
 
+import * as AnalysisLib from "analysis";
+
 let seasonsAnimation, timelineAnimation, currentlySelectedAnimation, analysisAnimation, cardAnimation, cards2Animation;
 const HomePage = () => {
   const [sideBarPage, setSideBarPage] = useState('map');
   const [currentPlot, setCurrentPlot] = useState({});
   const [plots, setPlotOptions] = useState([]);
   const [visible, setModal] = useState(false);
+  const [statsData, setStatsData] = useState([]);
+  const [objects, setNewObjects] = useState({});
 
   const newSetSideBarPage = (sideBarPageParam) => {
     console.log(sideBarPageParam);
@@ -92,6 +96,33 @@ const HomePage = () => {
   }
 
   const flipModal = () => {
+    const currentObjects = Object.values(objects);
+    const tempStatsData = {}
+    for (let i = 0; i < currentObjects.length; i++ ) {
+      const currentObject = currentObjects[i];
+      const sqFt = Math.floor((currentObject.width * currentObject.length) / 3.2808);
+
+      const acres = AnalysisLib.sqftToAcre(sqFt);
+      console.log(acres);
+      if (currentObject.currentPlot.type === 'crop') {
+        const name = currentObject.currentPlot.name;
+        if (currentObject.currentPlot.name in tempStatsData) {
+          tempStatsData[name] += parseFloat(acres.toFixed(2));
+        } else {
+          tempStatsData[name] = parseFloat(acres.toFixed(2));
+        }
+      }
+    }
+    const keys = Object.keys(tempStatsData);
+    const newStatsData = []
+    for (let j = 0; j < keys.length; j++ ) {
+      newStatsData.push({
+        crop: keys[j],
+        acre: tempStatsData[keys[j]]
+      })
+    }
+    setStatsData(d => newStatsData);
+
     setModal(!visible);
   };
 
@@ -178,7 +209,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <StatsModal visible={visible} setModal={flipModal} />
+      <StatsModal visible={visible} setModal={flipModal} statsData={statsData}/>
       <NavBar />
       <SideBar setSideBarPage={newSetSideBarPage} setModal={flipModal} />
       <Map
@@ -188,6 +219,7 @@ const HomePage = () => {
         sideBarPage={sideBarPage}
         setDraw={setDraw}
         setAnalysis={setAnalysis}
+        setNewObjects={setNewObjects}
       />
       <Timeline />
       <CurrentlySelected currentPlot={currentPlot} />

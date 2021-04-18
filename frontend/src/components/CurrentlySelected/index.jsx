@@ -14,7 +14,7 @@ const CurrentlySelected = (props) => {
       </div>
       <div className="text">
         <h2>Size</h2>
-        <h1>{props.currentPlot.sqFt ? props.currentPlot.sqFt + 'sqft': 'N/A' }</h1>
+        <h1>{props.currentPlot.sqFt ? Math.floor(props.currentPlot.sqFt / 1000) + 'k sqft': 'N/A' }</h1>
       </div>
     </div>
   )

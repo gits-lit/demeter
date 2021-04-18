@@ -16,26 +16,8 @@ import * as Analysis from "analysis"
 import './style.scss';
 
 const EstimatedFinancials = (props) => {
-  const exampleInput = [
-    {
-      crop: "Corn",
-      acre: 120
-    },
-    {
-      crop: "Strawberry",
-      acre: 30
-    },
-    {
-      crop: "Rice",
-      acre: 60
-    },
-    {
-      crop: "Wheat",
-      acre: 54
-    },
-  ];
 
-  const result = Analysis.determineSpendingAndRevenue(exampleInput)
+  const result = Analysis.determineSpendingAndRevenue(props.statsData)
   
   const data = [
     {

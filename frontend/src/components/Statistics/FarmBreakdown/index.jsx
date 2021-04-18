@@ -79,26 +79,8 @@ const renderActiveShape = (props) => {
 };
 
 const FarmBreakdown = (props) => {
-    const exampleInput = [
-        {
-          crop: "Corn",
-          acre: 120
-        },
-        {
-          crop: "Strawberry",
-          acre: 30
-        },
-        {
-          crop: "Rice",
-          acre: 60
-        },
-        {
-          crop: "Wheat",
-          acre: 54
-        },
-      ];
     
-      const data = exampleInput.map(input => ({
+      const data = props.statsData.map(input => ({
           name: input.crop,
           value: input.acre
       }));

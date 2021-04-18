@@ -51,14 +51,15 @@ const MapComponent = (props) => {
 
   const setObjects = (id, newObjects) => {
     objects[id] = newObjects;
+    props.setNewObjects(obj => objects);
   }
 
-  const onMapClick = async (map, e) => {
+  const onMapClick = async   (map, e) => {
     Object.values(objects).forEach(async(value) => {
       console.log(value);
       if (e.lngLat.lng < value.maxLat && e.lngLat.lat < value.maxLng && e.lngLat.lat > value.minLng && e.lngLat.lng > value.minLat) {
         const newNewCurrentPlot = {...value.currentPlot};
-        newNewCurrentPlot.sqFt = Math.floor(measure(value.maxLat, value.maxLng, value.minLat, value.minLng) / 3.2808);
+        newNewCurrentPlot.sqFt = Math.floor((value.width * value.length) / 3.2808);
         props.setCurrentPlot(
           newNewCurrentPlot
         );
@@ -70,8 +71,8 @@ const MapComponent = (props) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            lng: value.centerLng,
-            lat: value.centerLat,
+            lng: value.centerLat,
+            lat: value.centerLng,
             from: new Date().toISOString(),
             to: new Date().toISOString(),
           }),

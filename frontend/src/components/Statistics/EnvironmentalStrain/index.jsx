@@ -12,25 +12,7 @@ import * as Analysis from "analysis";
 import './style.scss';
 
 const EnvironmentalStrain = (props) => {
-  const exampleInput = [
-      {
-        crop: "Corn",
-        acre: 120
-      },
-      {
-        crop: "Strawberry",
-        acre: 30
-      },
-      {
-        crop: "Rice",
-        acre: 60
-      },
-      {
-        crop: "Wheat",
-        acre: 54
-      },
-    ];
-  const result = Analysis.determineWaterUsageAndYield(exampleInput)
+  const result = Analysis.determineWaterUsageAndYield(props.statsData)
   const data = [
     {
       name: 'Spring 2021',

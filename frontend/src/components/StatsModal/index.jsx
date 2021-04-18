@@ -67,12 +67,12 @@ const StatsModal = (props) => {
             explanation="This place is great overall, the soil temperature is lower than average so look into buying extra fertilizer during the Summer!"
           />
 
-          <FarmBreakdown />
+          <FarmBreakdown statsData={props.statsData}/>
         </div>
         <div className="bstats-container">
-          <CropRotation />
-          <EstimatedFinancials />
-          <EnvironmentalStrain />
+          <CropRotation statsData={props.statsData}/>
+          <EstimatedFinancials statsData={props.statsData}/>
+          <EnvironmentalStrain statsData={props.statsData}/>
         </div>
       </Modal>
     </div>

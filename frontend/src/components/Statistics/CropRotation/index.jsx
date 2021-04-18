@@ -7,26 +7,8 @@ import "./style.scss";
 import { useState } from "react";
 
 const CropRotation = (props) => {
-  const exampleInput = [
-    {
-      crop: "Corn",
-      acre: 120,
-    },
-    {
-      crop: "Strawberry",
-      acre: 30,
-    },
-    {
-      crop: "Rice",
-      acre: 60,
-    },
-    {
-      crop: "Wheat",
-      acre: 54,
-    },
-  ];
 
-  const data = exampleInput.map((currentCrop) => {
+  const data = props.statsData.map((currentCrop) => {
     const cropData = Analysis.dataForCrop(currentCrop.crop);
     const newCrop = Analysis.findAlternateCrop(cropData);
     return {
