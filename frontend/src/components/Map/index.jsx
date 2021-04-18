@@ -77,10 +77,7 @@ const MapComponent = (props) => {
       }
       const width = measure(0, maxLat, 0, minLat);
       const length = measure(maxLng, 0, minLng, 0);
-      console.log(maxLat);
-      console.log(maxLng);
-      console.log(minLat);
-      console.log(minLng);
+
       let centerLat = (maxLat + minLat) / 2;
       let centerLng = (maxLng + minLng) / 2;
       if (features[0].geometry.coordinates[0][0][0] < 0) {
@@ -97,7 +94,9 @@ const MapComponent = (props) => {
 
       if (ourDraw && features[0].id) {
         const currentId = features[0].id;
-        ourDraw.draw.delete(currentId);
+        setTimeout(() => {
+          ourDraw.draw.delete(currentId)
+        }, 3000);
       }
     }
   };
