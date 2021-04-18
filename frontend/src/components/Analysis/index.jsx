@@ -54,6 +54,42 @@ const Analysis = (props) => {
           }}>{props.analysis.pollen || 'N/A'}</h2>
         </Card>
       </div>
+      <div className="air-quality">
+        <h3>Air Quality Breakdown</h3>
+        <div className="section">
+          <p>Air Quality Index</p>
+          <p className="score">{props.analysis.airQuality ? Math.floor(props.analysis.airQuality['AQI']): 'N/A'}</p>
+          <hr />
+        </div>
+        <div className="section">
+          <p>Nitrogen Dioxide</p>
+          <p className="score">{props.analysis.airQuality ? Math.floor(props.analysis.airQuality['NO2']): 'N/A'}</p>
+          <hr />
+        </div>
+        <div className="section">
+          <p>Particulate Matter (2.5)</p>
+          <p className="score">{props.analysis.airQuality ? Math.floor(props.analysis.airQuality['PM25']): 'N/A'}</p>
+          <hr />
+        </div>
+        <div className="section">
+          <p>Carbon Monoxide</p>
+          <p className="score">{props.analysis.airQuality ? Math.floor(props.analysis.airQuality['CO']): 'N/A'}</p>
+          <hr />
+        </div>
+        <div className="section">
+          <p>Ozone</p>
+          <p className="score">{props.analysis.airQuality ? Math.floor(props.analysis.airQuality['OZONE']): 'N/A'}</p>
+          <hr />
+        </div>
+        <div className="section">
+          <p>Sulfur Dioxide</p>
+          <p className="score">{props.analysis.airQuality ? Math.floor(props.analysis.airQuality['SO2']): 'N/A'}</p>
+          <hr />
+        </div>
+      </div>
+      <div className="overall-breakdown">
+        <h3>Overall Breakdown</h3>
+      </div>
     </div>
   )
 }
