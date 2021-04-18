@@ -60,7 +60,7 @@ const EstimatedFinancials = (props) => {
   return (
     <div className="EstimatedFinancials">
       <h3 className="stat-title">Estimated Financials</h3>
-      <p className="sub-title">Recommendation based off nutrient levels</p>
+      <p className="sub-title">Based off location and current harvest</p>
       <ResponsiveContainer width="99%" aspect={1.5}>
         <BarChart
           data={data}

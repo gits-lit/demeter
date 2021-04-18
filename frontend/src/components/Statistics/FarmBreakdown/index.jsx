@@ -113,14 +113,14 @@ const FarmBreakdown = (props) => {
   return (
     <div className="FarmBreakdown">
       <h3 className="stat-title">Farm Breakdown</h3>
-      <p className="sub-title">Recommendation based off nutrient levels</p>
+      <p className="sub-title">Broken down by percentage</p>
       <div className="wrapper">
         <PieChart width={500} height={275}>
           <Pie
             activeIndex={activeIndex}
             activeShape={renderActiveShape}
             data={data}
-            cy='40%'
+            cy='45%'
             innerRadius={55}
             outerRadius={80}
             fill="#13D181"

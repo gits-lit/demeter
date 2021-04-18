@@ -6,7 +6,7 @@ import CropRotation from '../Statistics/CropRotation';
 import EstimatedFinancials from '../Statistics/EstimatedFinancials';
 import EnvironmentalStrain from '../Statistics/EnvironmentalStrain';
 import FarmBreakdown from '../Statistics/FarmBreakdown';
-import Breakdowns from '../Analysis/Breakdowns';
+import Breakdowns from '../Statistics/Breakdowns';
 
 import title from '../../assets/harveststats.svg';
 import './style.scss';
@@ -52,8 +52,20 @@ const StatsModal = (props) => {
       >
         <img className="title" src={title} alt="title" />
         <div className="tstats-container">
-          <Breakdowns title="Overall Breakdown" grade="A-" />
-          <Breakdowns title="Overall Breakdown" grade="A-" />
+          <Breakdowns
+            title="Location Score"
+            grade="A-"
+            criteria="Criteria based on soil quality, moisture, and
+            overall location."
+            explanation="This place is great overall, the soil temperature is lower than average so look into buying extra fertilizer during the Summer!"
+          />
+          <Breakdowns
+            title="Environmental Impact"
+            grade="A-"
+            criteria="Criteria based on soil quality, moisture, and
+            overall location."
+            explanation="This place is great overall, the soil temperature is lower than average so look into buying extra fertilizer during the Summer!"
+          />
 
           <FarmBreakdown />
         </div>
