@@ -54,7 +54,7 @@ const EnvironmentalStrain = (props) => {
   return (
     <div className="EnvironmentalStrain">
       <h3 className="stat-title">Environmental Strain</h3>
-      <p className="sub-title">Recommendation based off nutrient levels</p>
+      <p className="sub-title">Plotted on 2 key metrics</p>
       <ResponsiveContainer width="99%" aspect={1.5}>
         <AreaChart
           data={data}
