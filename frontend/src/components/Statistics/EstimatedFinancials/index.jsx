@@ -34,8 +34,8 @@ const EstimatedFinancials = (props) => {
       acre: 54
     },
   ];
-  let result = Analysis.determineSpendingAndRevenue(exampleInput)
-  console.log(result)
+
+  const result = Analysis.determineSpendingAndRevenue(exampleInput)
   
   const data = [
     {
@@ -53,8 +53,8 @@ const EstimatedFinancials = (props) => {
   ];
 
   for (let j = 0; j < data.length; j++) {
-      data[j].spending = result.spending[j]
-      data[j].revenue = result.revenue[j]
+      data[j].spending = -result.spending[j].toFixed(2)
+      data[j].revenue = result.revenue[j].toFixed(2)
   }
 
   return (

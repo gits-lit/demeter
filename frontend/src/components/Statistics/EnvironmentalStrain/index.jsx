@@ -8,33 +8,50 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-
+import * as Analysis from "analysis"
 import './style.scss';
 
-const data = [
-  {
-    name: 'Spring 2021',
-    water: 500,
-    yield: 800,
-  },
-  {
-    name: 'Summer 2021',
-    water: 980,
-    yield: 800,
-  },
-  {
-    name: 'Fall 2021',
-    water: 400,
-    yield: 800,
-  },
-  {
-    name: 'Winter 2021',
-    water: 400,
-    yield: 2200,
-  },
-];
 
 const EnvironmentalStrain = (props) => {
+  const exampleInput = [
+      {
+        crop: "Corn",
+        acre: 120
+      },
+      {
+        crop: "Strawberry",
+        acre: 30
+      },
+      {
+        crop: "Rice",
+        acre: 60
+      },
+      {
+        crop: "Wheat",
+        acre: 54
+      },
+    ];
+  const result = Analysis.determineWaterUsageAndYield(exampleInput)
+  const data = [
+    {
+      name: 'Spring 2021',
+    },
+    {
+      name: 'Summer 2021',
+    },
+    {
+      name: 'Fall 2021',
+    },
+    {
+      name: 'Winter 2021',
+    },
+  ];
+
+  for (let j = 0; j < data.length; j++) {
+      data[j].water = result.waterUsage[j].toFixed(2)
+      data[j].yield = result.yield[j].toFixed(2) / 10000
+  }
+
   return (
     <div className="EnvironmentalStrain">
       <h3 className="stat-title">Environmental Strain</h3>
